@@ -1,0 +1,105 @@
+{
+    "data":{
+        "name":"K.Madhan",
+        "email":"madhanrkv10@gmail.com",
+        "description":"Passionate Flutter developer with a knack for creating sleek and functional mobile applications",
+        "about":" I am a passionate Flutter developer from Chennai, who thrives on coding and continuously updating my skills. With a deep love for problem-solving, I am driven to achieve challenging targets , I am excited about the future possibilities in mobile app development.",
+        "github":"https://github.com/Madhan-Rkv-10",
+        "linked_in":"https://www.linkedin.com/in/madhan-k-/",
+        "languages":[
+            {
+                "name":"Flutter",
+                "image_url":"assets/images/flutter.png"
+            },
+            {
+                "name":"Dart",
+                "image_url":"assets/images/dart.png"
+            },
+            {
+                "name":"Firebase",
+                "image_url":"assets/images/firebase.png"
+            },
+            {
+                "name":"Hive",
+                "image_url":"assets/images/hive.png"
+           
+            },
+            {
+                "name":"sqlLite",
+                "image_url":"assets/images/sqllite.png"
+           
+            },
+            {
+                "name":"HTML",
+                "image_url":"assets/images/html.png"
+           
+            }
+            ,
+            {
+                "name":"css",
+                "image_url":"assets/images/css.png"
+           
+            }
+            ,
+            {
+                "name":"js",
+                "image_url":"assets/images/js.png"
+           
+            },
+            {
+                "name":"python",
+                "image_url":"assets/images/python.png"
+           
+            }
+         ],
+         "projects":[
+            {
+                "id":"p1",
+                "title":"Instagram Clone",
+                "description":[
+                       "This application is built using Flutter ,a cross-platform mobile development framework.",
+                       "It uses Google and Facebook authentication to allow users to sign in, and Riverpod for state management.",
+                       "The database is Cloud Firestore, a NoSQL database that is scalable and reliable.Users can post images or videos, and other users can comment and like or dislike the posts.",
+                       "Users can also delete posts that they have posted.This application is a great way to share your thoughts and experiences with others, and to connect with people who share your interests."
+],
+                "languages":["Flutter"," Dart"],
+                "features":["Firebase", "Riverpod"],
+                "authetication":["Google", "Facebook"],
+                "images":[],
+                "source_code":"https://github.com/agiratech-madhan/instagram_clone"
+            },
+            {
+                "id":"p2",
+                "title":"Movie Application",
+                "description":[
+                         "This application is built using Flutter, a cross-platform mobile development framework.",
+                         " It uses the Movie Database API to get data about movies, and Riverpod for state management.",
+                         " Flutter Hooks are also implemented, which allows for more concise and expressive code.",
+                         " Dynamic themes are available, so users can change the look and feel of the application to match their preferences. ",
+                         " Filter options are available, so users can narrow down the results to find the movies that they are interested in."],
+                "languages":["Flutter, Dart"],
+                "features":["REST API", "Riverpod"],
+                "authetication":[],
+                "images":[],
+                "source_code":"https://github.com/agiratech-madhan/instagram_clone"
+            },
+            {
+                "id":"p3",
+                "title":"Todo App",
+                "description":[
+                         "This application is built using Flutter, a cross-platform mobile development framework.",
+                         " It uses the Hive Database  to get data about todo, and Riverpod for state management.",
+                         " Flutter Hooks are also implemented, which allows for more concise and expressive code.",
+                         " Dynamic themes are available, so users can change the look and feel of the application to match their preferences. ",
+                         " Filter options are available, so users can narrow down the results to find the movies that they are interested in."
+                        ],
+                "languages":["Flutter, Dart"],
+                "features":["Hive", "Riverpod"],
+                "authetication":[],
+                "images":[],
+                "source_code":"https://github.com/agiratech-madhan/instagram_clone"
+            }
+
+         ]
+    }
+}

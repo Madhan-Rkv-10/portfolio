@@ -64,8 +64,8 @@ class ProjectCard extends HookConsumerWidget {
             },
             child: AnimatedContainer(
               duration: Duration(milliseconds: 400),
-              height: visible.value ? 450 : 320,
-              width: context.screenWidth,
+              // height: visible.value ? context.screenHeight * 0.4 : 320,
+              // width: context.screenWidth * 0.9,
 
               // alignment: Alignment.bottomCenter,
               clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -88,58 +88,62 @@ class ProjectCard extends HookConsumerWidget {
                       milliseconds: 400,
                     ),
                     height: visible.value ? 50 : 0,
+                    width: context.screenWidth * 0.8,
                     // width: visible.value,
                     decoration: BoxDecoration(
-                        color: primaryColor.withOpacity(0.5),
+                        // color: primaryColor.withOpacity(0.5),
                         boxShadow: [
-                          BoxShadow(
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
-                            color: primaryColor.withOpacity(0.3),
-                            // spreadRadius: 1,
-                          ),
+                          // BoxShadow(
+                          //   blurRadius: 8,
+                          //   offset: const Offset(0, 2),
+                          //   color: primaryColor.withOpacity(0.3),
+                          //   // spreadRadius: 1,
+                          // ),
                         ]),
                     child: AnimatedOpacity(
                       opacity: visible.value ? 1 : 0,
                       duration: Duration(microseconds: 400),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text(project.title.toString(),
-                                style: GoogleFonts.openSans(
-                                    fontSize: 20,
-                                    color: primaryColor,
-                                    fontWeight: FontWeight.w700)),
-                          ),
-                          IconButton(
-                              onPressed: () {
-                                context.goNamed(AppRoute.projectDetails.name,
-                                    pathParameters: {
-                                      "id": project.id.toString(),
-                                    },
-                                    queryParameters: {
-                                      "title": project.title.toString()
-                                    });
-                              },
-                              icon: FaIcon(
-                                Icons.info_outline,
-                                color: primaryColor,
-                              )),
-                          IconButton(
-                            onPressed: () {},
-                            icon: FaIcon(
-                              FontAwesomeIcons.github,
-                              color: primaryColor,
+                      child: Container(
+                        color: Colors.grey.shade300,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Text(project.title.toString(),
+                                  style: GoogleFonts.openSans(
+                                      fontSize: 20,
+                                      color: primaryColor,
+                                      fontWeight: FontWeight.w700)),
                             ),
-                          ),
+                            IconButton(
+                                onPressed: () {
+                                  context.goNamed(AppRoute.projectDetails.name,
+                                      pathParameters: {
+                                        "id": project.id.toString(),
+                                      },
+                                      queryParameters: {
+                                        "title": project.title.toString()
+                                      });
+                                },
+                                icon: FaIcon(
+                                  FontAwesomeIcons.circleInfo,
+                                  color: primaryColor,
+                                )),
+                            // IconButton(
+                            //   onPressed: () {},
+                            //   icon: FaIcon(
+                            //     FontAwesomeIcons.github,
+                            //     color: primaryColor,
+                            //   ),
+                            // ),
 
-                          // ElevatedButton.icon(
-                          //     icon: FaIcon(Icons.info_outline),
-                          //     onPressed: () {},
-                          //     label: const Text("More Info"))
-                        ],
+                            // ElevatedButton.icon(
+                            //     icon: FaIcon(Icons.info_outline),
+                            //     onPressed: () {},
+                            //     label: const Text("More Info"))
+                          ],
+                        ),
                       ),
                     ),
                   ).animate().scale(
@@ -147,53 +151,72 @@ class ProjectCard extends HookConsumerWidget {
                       begin: Offset(0, 1),
                       duration: Duration(milliseconds: 500)),
 
-                  Expanded(
-                    child: Container(
-                      color: Colors.grey.shade300,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ClipRRect(
-                            // borderRadius: const BorderRadius.only(
-                            //     bottomLeft: Radius.circular(10),
-                            //     bottomRight: Radius.circular(10)),
-                            child: Container(
-                              width: 130,
-                              margin: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.network(
-                                    // height: 300,
-                                    width: 150,
-                                    isAntiAlias: true,
-                                    fit: BoxFit.fill,
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfS04L7MmiGxm94FKQ8BFYcLvjOa1SNZOj_k5a9jW9dmnhLKyyqJVRXevIhWWpojUJ3s&usqp=CAU"),
-                              ),
-                            ),
-                          ),
-                          ClipRRect(
-                            // borderRadius: const BorderRadius.only(
-                            //     bottomLeft: Radius.circular(10),
-                            //     bottomRight: Radius.circular(10)),
-                            child: Container(
-                              width: 130,
-                              margin: EdgeInsets.all(8),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.network(
-                                    // height: 300,
-                                    width: 150,
-                                    // isAntiAlias: true,
-                                    fit: BoxFit.fill,
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfS04L7MmiGxm94FKQ8BFYcLvjOa1SNZOj_k5a9jW9dmnhLKyyqJVRXevIhWWpojUJ3s&usqp=CAU"),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  Container(
+                    height: context.screenHeight * 0.55,
+
+                    child: ClipRRect(
+                        borderRadius: visible.value
+                            ? BorderRadius.only(
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8))
+                            : BorderRadius.circular(8),
+                        child: Image.asset(
+                            width: context.screenWidth * 0.8,
+                            fit: BoxFit.fill,
+                            "assets/project_assets/todo_filter.png")
+
+                        //  Image.network(
+                        //     // height: 300,
+                        //     width: double.infinity,
+                        //     // isAntiAlias: true,
+                        //     fit: BoxFit.fill,
+                        //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfS04L7MmiGxm94FKQ8BFYcLvjOa1SNZOj_k5a9jW9dmnhLKyyqJVRXevIhWWpojUJ3s&usqp=CAU"),
+
+                        ),
+
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     ClipRRect(
+                    //       // borderRadius: const BorderRadius.only(
+                    //       //     bottomLeft: Radius.circular(10),
+                    //       //     bottomRight: Radius.circular(10)),
+                    //       child: Container(
+                    //         width: 130,
+                    //         margin: EdgeInsets.all(8),
+                    //         decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(8)),
+                    //         child: ClipRRect(
+                    //           borderRadius: BorderRadius.circular(8),
+                    //           child: Image.network(
+                    //               // height: 300,
+                    //               width: 150,
+                    //               isAntiAlias: true,
+                    //               fit: BoxFit.fill,
+                    //               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfS04L7MmiGxm94FKQ8BFYcLvjOa1SNZOj_k5a9jW9dmnhLKyyqJVRXevIhWWpojUJ3s&usqp=CAU"),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     ClipRRect(
+                    //       // borderRadius: const BorderRadius.only(
+                    //       //     bottomLeft: Radius.circular(10),
+                    //       //     bottomRight: Radius.circular(10)),
+                    //       child: Container(
+                    //         width: 130,
+                    //         margin: EdgeInsets.all(8),
+                    //         child: ClipRRect(
+                    //           borderRadius: BorderRadius.circular(8),
+                    //           child: Image.network(
+                    //               // height: 300,
+                    //               width: 150,
+                    //               // isAntiAlias: true,
+                    //               fit: BoxFit.fill,
+                    //               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfS04L7MmiGxm94FKQ8BFYcLvjOa1SNZOj_k5a9jW9dmnhLKyyqJVRXevIhWWpojUJ3s&usqp=CAU"),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ),
                   // AnimatedContainer(
                   //   // height: 80,
@@ -295,4 +318,61 @@ class ProjectCard extends HookConsumerWidget {
 /**
  *  
  *  
+ */
+
+// row double image
+/**
+ * Expanded(
+                    child: Container(
+                      color: Colors.grey.shade300,
+                      child:
+                      
+                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ClipRRect(
+                            // borderRadius: const BorderRadius.only(
+                            //     bottomLeft: Radius.circular(10),
+                            //     bottomRight: Radius.circular(10)),
+                            child: Container(
+                              width: 130,
+                              margin: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.network(
+                                    // height: 300,
+                                    width: 150,
+                                    isAntiAlias: true,
+                                    fit: BoxFit.fill,
+                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfS04L7MmiGxm94FKQ8BFYcLvjOa1SNZOj_k5a9jW9dmnhLKyyqJVRXevIhWWpojUJ3s&usqp=CAU"),
+                              ),
+                            ),
+                          ),
+                          ClipRRect(
+                            // borderRadius: const BorderRadius.only(
+                            //     bottomLeft: Radius.circular(10),
+                            //     bottomRight: Radius.circular(10)),
+                            child: Container(
+                              width: 130,
+                              margin: EdgeInsets.all(8),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.network(
+                                    // height: 300,
+                                    width: 150,
+                                    // isAntiAlias: true,
+                                    fit: BoxFit.fill,
+                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfS04L7MmiGxm94FKQ8BFYcLvjOa1SNZOj_k5a9jW9dmnhLKyyqJVRXevIhWWpojUJ3s&usqp=CAU"),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+
+
+                      
+                    ),
+                  ),
  */

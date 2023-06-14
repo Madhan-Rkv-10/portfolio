@@ -25,7 +25,7 @@
            
             },
             {
-                "name":"sqlLite",
+                "name":"SqLite",
                 "image_url":"assets/images/sqllite.png"
            
             },
@@ -36,18 +36,18 @@
             }
             ,
             {
-                "name":"css",
+                "name":"CSS",
                 "image_url":"assets/images/css.png"
            
             }
             ,
             {
-                "name":"js",
+                "name":"Javascript",
                 "image_url":"assets/images/js.png"
            
             },
             {
-                "name":"python",
+                "name":"Python",
                 "image_url":"assets/images/python.png"
            
             }
@@ -65,7 +65,7 @@
                 "languages":["Flutter"," Dart"],
                 "features":["Firebase", "Riverpod"],
                 "authetication":["Google", "Facebook"],
-                "images":[],
+                "images":[ "assets/project_assets/todo_filter.png"],
                 "source_code":"https://github.com/agiratech-madhan/instagram_clone"
             },
             {
@@ -77,7 +77,7 @@
                          " Flutter Hooks are also implemented, which allows for more concise and expressive code.",
                          " Dynamic themes are available, so users can change the look and feel of the application to match their preferences. ",
                          " Filter options are available, so users can narrow down the results to find the movies that they are interested in."],
-                "languages":["Flutter, Dart"],
+                "languages":["Flutter"," Dart"],
                 "features":["REST API", "Riverpod"],
                 "authetication":[],
                 "images":[],
@@ -93,7 +93,7 @@
                          " Dynamic themes are available, so users can change the look and feel of the application to match their preferences. ",
                          " Filter options are available, so users can narrow down the results to find the movies that they are interested in."
                         ],
-                "languages":["Flutter, Dart"],
+                "languages":["Flutter", "Dart"],
                 "features":["Hive", "Riverpod"],
                 "authetication":[],
                 "images":[],

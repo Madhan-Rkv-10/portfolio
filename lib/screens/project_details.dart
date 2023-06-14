@@ -105,11 +105,17 @@ class ProjectDetails extends HookConsumerWidget {
                               },
                               itemBuilder: (context, index) {
                                 return Center(
-                                    child: Container(
-                                        key: Key(sam[index]),
-                                        padding: EdgeInsets.all(8),
-                                        child: Image.network(
-                                            "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-12-r1.jpg")));
+                                  child: Container(
+                                      key: Key(sam[index]),
+                                      padding: EdgeInsets.all(8),
+                                      child: Image.asset(
+                                          "assets/project_assets/todo_filter.png")
+                                      //  Image.network(
+                                      //   "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-12-r1.jpg",
+                                      // ),
+
+                                      ),
+                                );
                               }),
                         ),
                         SmoothPageIndicator(

@@ -6,8 +6,12 @@ import 'package:madhan_portfolio/ui_utils/common_icon.dart';
 import 'package:madhan_portfolio/utils/src/helpers/ui_dimens.dart';
 
 class CommonAppBar extends AppBar {
+  final ScrollController? scrollController;
   CommonAppBar(
-      {final String? title, super.key, final bool actionExpand = false})
+      {final String? title,
+      super.key,
+      final bool actionExpand = false,
+      this.scrollController})
       : super(
             toolbarHeight: 65,
             backgroundColor: primaryColor,

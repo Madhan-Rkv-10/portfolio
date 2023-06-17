@@ -12,6 +12,7 @@ import '../ui_utils/responsive_layout.dart';
 enum AppRoute {
   home,
   projectDetails,
+  webProjectDetails,
   about,
   contact,
   aboutDetails,
@@ -46,6 +47,18 @@ final GoRouter goRouter = GoRouter(
           builder: (BuildContext context, GoRouterState state) {
             return const ScreenA();
           },
+          routes: [
+            GoRoute(
+              name: AppRoute.webProjectDetails.name,
+              path: 'wProjectDetails/:id',
+              builder: (BuildContext context, GoRouterState state) {
+                return ProjectDetails(
+                  id: state.pathParameters['id']!,
+                  title: state.queryParameters['title'] ?? '',
+                );
+              },
+            ),
+          ],
         ),
 
         /// Displayed when the second item in the the bottom navigation bar is

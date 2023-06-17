@@ -80,8 +80,6 @@ class ProjectDetails extends HookConsumerWidget {
                       children: [
                         AspectRatio(
                           aspectRatio: 1,
-                          // child: Container(
-                          // height: context.screenHeight * 0.3,
                           child: PageView.builder(
                               controller: pageViewController,
                               itemCount: sam.length,
@@ -210,20 +208,23 @@ class DescriptionsTile extends StatelessWidget {
   final String description;
   @override
   Widget build(BuildContext context) {
-    return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Icon(
-        Icons.star_border_outlined,
-        color: Colors.purple,
-      ), //bullet text
-      SizedBox(
-        width: 10,
-      ), //space between bullet and text
-      Expanded(
-        child: Text(
-          description,
-          style: TextStyle(fontSize: 16),
-        ), //text
-      )
-    ]);
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(
+          Icons.star_border_outlined,
+          color: primaryColor,
+        ), //bullet text
+        SizedBox(
+          width: 10,
+        ), //space between bullet and text
+        Expanded(
+          child: Text(
+            description,
+            style: TextStyle(fontSize: 16),
+          ), //text
+        )
+      ],
+    ).paddingOnly(bottom: 7);
   }
 }

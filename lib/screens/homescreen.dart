@@ -104,7 +104,7 @@ class ScreenA extends HookConsumerWidget {
                       softWrap: true,
                       textAlign: TextAlign.justify,
                       style: GoogleFonts.openSans(
-                          fontSize: 15, color: Colors.black54),
+                          fontSize: 25, color: Colors.pink),
                     )
                         .animate()
                         .fadeIn(duration: 900.ms, delay: 300.ms)

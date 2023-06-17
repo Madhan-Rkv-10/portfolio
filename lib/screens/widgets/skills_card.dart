@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:madhan_portfolio/screens/contacts.dart';
 import 'package:madhan_portfolio/screens/widgets/common_image.dart';
 import 'package:madhan_portfolio/utils/src/helpers/ui_dimens.dart';
@@ -59,7 +60,11 @@ class SkillsCard extends StatelessWidget {
                 image: image,
                 networkImage: false,
               ),
-              Text(name)
+              Text(
+                name,
+                style: GoogleFonts.openSans(
+                    fontSize: 20, fontWeight: FontWeight.w500),
+              )
             ],
           ),
         ),

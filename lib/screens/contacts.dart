@@ -78,26 +78,29 @@ class ScreenC extends HookConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Lets Built Something better",
-                      style: GoogleFonts.openSans(
-                          fontSize: 20, color: Colors.black),
-                    ),
-                    Text(
-                      "Together",
-                      style: GoogleFonts.openSans(
-                          fontSize: 20, color: Colors.black),
-                    ),
-                  ],
-                )
-              ]),
-              Container(
-                  // margin: EdgeInsets.only(right: 300),
-                  child: Transform.scale(
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Lets Built Something better",
+                        style: GoogleFonts.openSans(
+                            fontSize: 20, color: Colors.black),
+                      ),
+                      Text(
+                        "Together",
+                        style: GoogleFonts.openSans(
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Transform.scale(
                 scale: 1.28,
                 // transform:Matrix4.translation(3),
                 child: Lottie.asset(
@@ -107,21 +110,16 @@ class ScreenC extends HookConsumerWidget {
                     height: context.screenHeight * 0.4,
                     // fit: BoxFit.fitHeight,
                     'assets/json/contact.json'),
-              )),
-              FormTitle(
+              ),
+              const FormTitle(
                 title: "Name",
               ),
               CommonTextField(
                   controller: nameController,
                   validate: (value) {
-                    // Check if this field is empty
                     if (value.isEmpty) {
                       return 'This field is required';
                     }
-
-                    // using regular expression
-
-                    // the email is valid
                     return '';
                   },
                   onEditing: (value) {
@@ -130,210 +128,19 @@ class ScreenC extends HookConsumerWidget {
                   },
                   title: '',
                   textinputAction: TextInputAction.next,
-                  textinputType: TextInputType.name)
-              // Container(
-              //   width: double.infinity,
-              //   // height: 50,
-              //   // constraints: BoxConstraints(maxHeight: 80, minHeight: 45),
-              //   child: TextFormField(
-              //     enableSuggestions: true,
-              //     keyboardType: TextInputType.name,
-              //     onChanged: (value) {
-              //       _formKey.currentState?.validate();
-              //     },
-              //     validator: (value) {
-              //       // Check if this field is empty
-              //       if (value == null || value.isEmpty) {
-              //         return 'This field is required';
-              //       }
-
-              //       // using regular expression
-
-              //       // the email is valid
-              //       return null;
-              //     },
-              //     controller: nameController,
-              //     textInputAction: TextInputAction.next,
-              //     style: TextStyle(fontSize: 18, color: Colors.black),
-              //     decoration: InputDecoration(
-              //       // hintText: 'Hi',
-              //       contentPadding:
-              //           EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-              //       fillColor: Colors.white,
-              //       border: OutlineInputBorder(
-              //         borderSide: BorderSide(
-              //           color: primaryColor,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              ,
-              SizedBox(
+                  textinputType: TextInputType.name),
+              const SizedBox(
                 height: 8,
               ),
-              FormTitle(
+              const FormTitle(
                 title: "Email",
               ),
-              // Container(
-              //   width: double.infinity,
-              //   // constraints: BoxConstraints(maxHeight: 80, minHeight: 45),
-              //   child: TextFormField(
-              //     enableSuggestions: true,
-              //     controller: emailController,
-              //     onChanged: (value) {
-              //       _formKey.currentState?.validate();
-              //     },
-              //     validator: (value) {
-              //       if (value == null || value.isEmpty) {
-              //         return '*Required';
-              //       } else {
-              //         if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-              //           return "Please enter a valid email address";
-              //         }
-              //       }
-              //       return null;
-              //     },
-              //     keyboardType: TextInputType.name,
-              //     textInputAction: TextInputAction.next,
-              //     style: TextStyle(fontSize: 18),
-              //     decoration: InputDecoration(
-              //       contentPadding:
-              //           EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-              //       // hintText: 'Email',
-              //       fillColor: Colors.white,
-              //       border: OutlineInputBorder(
-              //         borderSide: BorderSide(
-              //           color: Colors.purple,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
-              CommonTextField(
-                  controller: emailController,
-                  onEditing: (p0) {
-                    _formKey.currentState!.validate();
-                    return '';
-                  },
-                  validate: (value) {
-                    if (value.isEmpty) {
-                      return '*Required';
-                    } else {
-                      if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                        return "Please enter a valid email address";
-                      }
-                    }
-                    return '';
-                  },
-                  title: '',
-                  textinputAction: TextInputAction.next,
-                  textinputType: TextInputType.emailAddress),
-              SizedBox(height: 8),
-              FormTitle(
-                title: "Mobile Number",
-              ),
-              // Container(
-              //   width: double.infinity,
-              //   // constraints: BoxConstraints(maxHeight: 80, minHeight: 45),
-              //   child: TextFormField(
-              //     enableSuggestions: true,
-              //     // maxLength: 10,
-              //     // spellCheckConfiguration: SpellCheckConfiguration.disabled(),
-              //     controller: phoneNumberController,
-              //     keyboardType: TextInputType.number,
-              //     textInputAction: TextInputAction.next,
-              //     style: TextStyle(fontSize: 18),
-              //     validator: (value) {
-              //       // Check if this field is empty
-              // if (value == null || value.isEmpty) {
-              //   return 'This field is required';
-              // } else {}
-
-              // // using regular expression
-
-              // // the email is valid
-              // return null;
-              //     },
-              //     decoration: InputDecoration(
-              //       // hintText: 'Hi',
-              //       contentPadding:
-              //           EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-              //       fillColor: Colors.white,
-              //       border: OutlineInputBorder(
-              //         borderSide: BorderSide(
-              //           color: Colors.purple,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
-              CommonTextField(
-                  controller: phoneNumberController,
-                  validate: (value) {
-                    if (value.isEmpty) {
-                      return 'This field is required';
-                    } else {}
-
-                    // using regular expression
-
-                    // the email is valid
-                    return '';
-                  },
-                  onEditing: (value) {
-                    _formKey.currentState?.validate();
-                    return '';
-                  },
-                  title: 'title',
-                  textinputAction: TextInputAction.next,
-                  textinputType: TextInputType.number),
-
-              SizedBox(
-                height: 8,
-              ),
-              FormTitle(
-                title: "Subject",
-              ),
-              // Container(
-              //   width: double.infinity,
-              //   // constraints: BoxConstraints(maxHeight: 80, minHeight: 45),
-              //   child: TextFormField(
-              //     enableSuggestions: true,
-              //     textInputAction: TextInputAction.next,
-              //     controller: subjectController,
-              //     validator: (value) {
-              //       if (value == null || value.isEmpty) {
-              //         return '*Required';
-              //       }
-              //       return null;
-              //     },
-              //     style: const TextStyle(fontSize: 18),
-              //     decoration: const InputDecoration(
-              //       // hintText: 'Hi',
-              //       contentPadding:
-              //           EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-              //       fillColor: Colors.white,
-              //       border: OutlineInputBorder(
-              //         borderSide: BorderSide(
-              //           color: Color.fromARGB(255, 18, 79, 124),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
               CommonTextField(
                 controller: subjectController,
                 validate: (value) {
                   if (value.isEmpty) {
                     return 'This field is required';
                   } else {}
-
-                  // using regular expression
-
-                  // the email is valid
                   return '';
                 },
                 onEditing: (value) {
@@ -485,8 +292,9 @@ class ScreenC extends HookConsumerWidget {
 }
 
 class FormTitle extends StatelessWidget {
-  const FormTitle({super.key, required this.title});
+  const FormTitle({super.key, required this.title, this.isWeb = false});
   final String title;
+  final bool isWeb;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -494,7 +302,9 @@ class FormTitle extends StatelessWidget {
         child: Text(
           title,
           style: TextStyle(
-              fontSize: 18, color: primaryColor, fontWeight: FontWeight.w500),
+              fontSize: 18,
+              color: isWeb ? Colors.black : primaryColor,
+              fontWeight: FontWeight.w500),
         ));
   }
 }

@@ -24,6 +24,7 @@ class ScreenB extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
+    final onTapped = useState(false);
 
     return Scaffold(
         // backgroundColor: Colors.black12,
@@ -37,8 +38,20 @@ class ScreenB extends HookConsumerWidget {
                   controller: scrollController,
                   itemCount: data.data?.projects?.length,
                   itemBuilder: (context, index) {
+                    final List<bool> onHover = List.generate(
+                        data.data?.projects?.length ?? 0, (index) => false);
                     final project = data.data?.projects?.elementAt(index);
-                    return ProjectCard(project: project!);
+                    return MouseRegion(
+                        onEnter: (value) {
+                          print(onHover[index]);
+                          onHover[index] = !onHover[index];
+                        },
+                        onExit: (value) {
+                          print(onHover[index]);
+
+                          onHover[index] = false;
+                        },
+                        child: ProjectCard(project: project!));
                   });
             }));
   }
@@ -47,10 +60,11 @@ class ScreenB extends HookConsumerWidget {
 class ProjectCard extends HookConsumerWidget {
   final Project project;
   const ProjectCard({required this.project, super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final visible = useState(false);
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         visible.value = !visible.value;
       },
@@ -58,7 +72,7 @@ class ProjectCard extends HookConsumerWidget {
         // mainAxisSize: MainAxisSize.min,
         // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          GestureDetector(
+          InkWell(
             onTap: () {
               visible.value = !visible.value;
             },
@@ -73,12 +87,12 @@ class ProjectCard extends HookConsumerWidget {
                   // color: Colors.pink,
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
-                    // BoxShadow(
-                    //   blurRadius: 8,
-                    //   offset: const Offset(0, 1),
-                    //   color: Colors.grey,
-                    //   spreadRadius: 1,
-                    // ),
+                    BoxShadow(
+                      blurRadius: 5,
+                      offset: const Offset(0, 1),
+                      color: primaryColor,
+                      // spreadRadius: 1,
+                    ),
                   ]),
               margin: const EdgeInsets.all(18),
               child: Column(
@@ -150,10 +164,8 @@ class ProjectCard extends HookConsumerWidget {
                       curve: Curves.easeIn,
                       begin: Offset(0, 1),
                       duration: Duration(milliseconds: 500)),
-
                   Container(
                     height: context.screenHeight * 0.55,
-
                     child: ClipRRect(
                         borderRadius: visible.value
                             ? BorderRadius.only(
@@ -163,104 +175,8 @@ class ProjectCard extends HookConsumerWidget {
                         child: Image.asset(
                             width: context.screenWidth * 0.8,
                             fit: BoxFit.fill,
-                            "assets/project_assets/todo_filter.png")
-
-                        //  Image.network(
-                        //     // height: 300,
-                        //     width: double.infinity,
-                        //     // isAntiAlias: true,
-                        //     fit: BoxFit.fill,
-                        //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfS04L7MmiGxm94FKQ8BFYcLvjOa1SNZOj_k5a9jW9dmnhLKyyqJVRXevIhWWpojUJ3s&usqp=CAU"),
-
-                        ),
-
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     ClipRRect(
-                    //       // borderRadius: const BorderRadius.only(
-                    //       //     bottomLeft: Radius.circular(10),
-                    //       //     bottomRight: Radius.circular(10)),
-                    //       child: Container(
-                    //         width: 130,
-                    //         margin: EdgeInsets.all(8),
-                    //         decoration: BoxDecoration(
-                    //             borderRadius: BorderRadius.circular(8)),
-                    //         child: ClipRRect(
-                    //           borderRadius: BorderRadius.circular(8),
-                    //           child: Image.network(
-                    //               // height: 300,
-                    //               width: 150,
-                    //               isAntiAlias: true,
-                    //               fit: BoxFit.fill,
-                    //               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfS04L7MmiGxm94FKQ8BFYcLvjOa1SNZOj_k5a9jW9dmnhLKyyqJVRXevIhWWpojUJ3s&usqp=CAU"),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //     ClipRRect(
-                    //       // borderRadius: const BorderRadius.only(
-                    //       //     bottomLeft: Radius.circular(10),
-                    //       //     bottomRight: Radius.circular(10)),
-                    //       child: Container(
-                    //         width: 130,
-                    //         margin: EdgeInsets.all(8),
-                    //         child: ClipRRect(
-                    //           borderRadius: BorderRadius.circular(8),
-                    //           child: Image.network(
-                    //               // height: 300,
-                    //               width: 150,
-                    //               // isAntiAlias: true,
-                    //               fit: BoxFit.fill,
-                    //               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfS04L7MmiGxm94FKQ8BFYcLvjOa1SNZOj_k5a9jW9dmnhLKyyqJVRXevIhWWpojUJ3s&usqp=CAU"),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
+                            "assets/project_assets/todo_filter.png")),
                   ),
-                  // AnimatedContainer(
-                  //   // height: 80,
-                  //   duration: Duration(
-                  //     milliseconds: 400,
-                  //   ),
-                  //   height: visible.value ? 50 : 0,
-                  //   color: primaryColor.withOpacity(0.7),
-                  //   child:
-                  //       // SwipeButton(
-                  //       //   elevationThumb: 10,
-
-                  //       //       //   onSwipeEnd: () {
-                  //       //       //     print("object");
-                  //       //       //   },
-                  //       //       //   child: Text('data'),
-                  //       //       // )
-
-                  //       Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //     children: [
-                  //       CommonElevatedButton(
-                  //           onPressed: () {},
-                  //           iconButton: true,
-                  //           style: ElevatedButton.styleFrom(
-                  //               foregroundColor: primaryColor),
-                  //           // roundedBorder: false,
-                  //           icon: const Icon(Icons.info_outline),
-                  //           text: "More Info"),
-                  //       CommonElevatedButton(
-                  //           style: ElevatedButton.styleFrom(
-                  //               foregroundColor: primaryColor),
-                  //           onPressed: () {
-                  //             print(project.sourceCode);
-                  //           },
-                  //           iconButton: true,
-                  //           icon: const FaIcon(FontAwesomeIcons.github),
-                  //           text: "Code"),
-                  //     ],
-                  //   ),
-                  // ).animate().scale(
-                  //     curve: Curves.easeIn,
-                  //     begin: Offset(0, 1),
-                  //     duration: Duration(milliseconds: 500)),
                 ],
               ),
             ),

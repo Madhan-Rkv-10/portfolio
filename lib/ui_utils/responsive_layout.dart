@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const webScreenSize = 600;
+const webScreenSize = 700;
 
 class ResponsiveLayout extends StatefulWidget {
   final Widget mobileScreenLayout;

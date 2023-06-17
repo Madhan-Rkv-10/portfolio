@@ -106,8 +106,9 @@ class Project {
   final List<String>? languages;
   final List<String>? features;
   final List<String>? authetication;
-  final List<dynamic>? images;
+  final List<String>? images;
   final String? sourceCode;
+  bool isHover;
 
   Project({
     this.id,
@@ -116,6 +117,7 @@ class Project {
     this.languages,
     this.features,
     this.authetication,
+    this.isHover = false,
     this.images,
     this.sourceCode,
   });
@@ -137,7 +139,7 @@ class Project {
             : List<String>.from(json["authetication"]!.map((x) => x)),
         images: json["images"] == null
             ? []
-            : List<dynamic>.from(json["images"]!.map((x) => x)),
+            : List<String>.from(json["images"]!.map((x) => x)),
         sourceCode: json["source_code"],
       );
 
@@ -156,7 +158,7 @@ class Project {
             ? []
             : List<dynamic>.from(authetication!.map((x) => x)),
         "images":
-            images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
+            images == null ? [] : List<String>.from(images!.map((x) => x)),
         "source_code": sourceCode,
       };
 }

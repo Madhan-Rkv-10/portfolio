@@ -25,6 +25,11 @@
            
             },
             {
+                "name":"Kotlin",
+                "image_url":"assets/images/kotlin.png"
+
+            },
+            {
                 "name":"SqLite",
                 "image_url":"assets/images/sqllite.png"
            
@@ -80,7 +85,7 @@
                 "languages":["Flutter"," Dart"],
                 "features":["REST API", "Riverpod"],
                 "authetication":[],
-                "images":[],
+                "images":["assets/project_assets/todo_filter.png"],
                 "source_code":"https://github.com/agiratech-madhan/instagram_clone"
             },
             {
@@ -96,7 +101,7 @@
                 "languages":["Flutter", "Dart"],
                 "features":["Hive", "Riverpod"],
                 "authetication":[],
-                "images":[],
+                "images":["assets/project_assets/todo_filter.png"],
                 "source_code":"https://github.com/agiratech-madhan/instagram_clone"
             }
 

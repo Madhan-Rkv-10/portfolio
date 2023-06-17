@@ -3,16 +3,21 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:madhan_portfolio/router/app_router.dart';
 import 'package:madhan_portfolio/screens/homescreen.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
+
 import 'package:madhan_portfolio/screens/contacts.dart';
 import 'package:madhan_portfolio/screens/projects.dart';
 
 import 'package:madhan_portfolio/ui_utils/responsive_layout.dart';
 import 'package:madhan_portfolio/utils/src/colors/app_theme.dart';
+
+import 'firebase_options.dart';
 
 // This scenario demonstrates how to set up nested navigation using ShellRoute,
 // which is a pattern where an additional Navigator is placed in the widget tree
@@ -23,7 +28,14 @@ import 'package:madhan_portfolio/utils/src/colors/app_theme.dart';
 // push a screen using a different navigator (such as the root Navigator) by
 // providing a `parentNavigatorKey`.
 
-void main() {
+void main() async {
+  // GoRouter.setUrlPathStrategy(UrlPathStrategy.path);
+  WidgetsFlutterBinding.ensureInitialized();
+
+  usePathUrlStrategy();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(ProviderScope(child: ShellRouteExampleApp()));
 }
 

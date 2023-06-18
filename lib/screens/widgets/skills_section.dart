@@ -41,7 +41,7 @@ class SkillsSection extends HookConsumerWidget {
         child: Align(
           alignment: Alignment.centerLeft,
           child: SizedBox(
-            width: context.screenWidth * pageController.viewportFraction,
+            width: 180,
             child: FractionallySizedBox(
               child: SkillsCard(
                   // isFlutter: currentPage.value == 0,

@@ -57,62 +57,70 @@ class WebScreenLayout extends HookConsumerWidget {
         backgroundColor: primaryColor,
         toolbarHeight: 70,
         automaticallyImplyLeading: false,
-        title: Container(
-          child: Row(
-            // mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CircleAvatar(
-                  radius: 18,
-                  backgroundColor: Colors.white,
-                  child: Text("M").paddingAll(5)),
-              Row(
-                children: [
-                  TextButton(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                    radius: 18,
+                    backgroundColor: Colors.white,
+                    child: const Text("M").paddingAll(5)),
+                SizedBox(width: 20),
+                Text(
+                  "Madhan",
+                  style: GoogleFonts.openSans(
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    scrollToTopPercentage(scrollController, 0);
+                  },
+                  child: Text(
+                    "Home",
+                    style: GoogleFonts.openSans(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                TextButton(
                     onPressed: () {
-                      scrollToTopPercentage(scrollController, 0);
+                      scrollToTopPercentage(scrollController, 0.3);
                     },
                     child: Text(
-                      "Home",
+                      "About",
                       style: GoogleFonts.openSans(
                         color: Colors.white,
                       ),
-                    ),
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        scrollToTopPercentage(scrollController, 0.3);
-                      },
-                      child: Text(
-                        "About",
-                        style: GoogleFonts.openSans(
-                          color: Colors.white,
-                        ),
-                      )),
-                  TextButton(
-                      onPressed: () {
-                        scrollToTopPercentage(scrollController, 0.65);
-                      },
-                      child: Text(
-                        "Projects",
-                        style: GoogleFonts.openSans(
-                          color: Colors.white,
-                        ),
-                      )),
-                  TextButton(
-                      onPressed: () {
-                        scrollToTopPercentage(scrollController, 1);
-                      },
-                      child: Text(
-                        "Contact",
-                        style: GoogleFonts.openSans(
-                          color: Colors.white,
-                        ),
-                      ))
-                ],
-              )
-            ],
-          ),
+                    )),
+                TextButton(
+                    onPressed: () {
+                      scrollToTopPercentage(scrollController, 0.65);
+                    },
+                    child: Text(
+                      "Projects",
+                      style: GoogleFonts.openSans(
+                        color: Colors.white,
+                      ),
+                    )),
+                TextButton(
+                    onPressed: () {
+                      scrollToTopPercentage(scrollController, 1);
+                    },
+                    child: Text(
+                      "Contact",
+                      style: GoogleFonts.openSans(
+                        color: Colors.white,
+                      ),
+                    ))
+              ],
+            )
+          ],
         ),
       ),
       body: SingleChildScrollView(
@@ -239,28 +247,10 @@ class WebScreenLayout extends HookConsumerWidget {
                   ),
                   Expanded(
                     child: Container(
-                      // margin: EdgeInsets.only(bottom: 40),
-                      // color: Colors.red,
-                      // width: 800,
-                      // width: context.screenWidth * 0.5,
-                      // height: context.screenHeight * 0.4,
-                      // // color: Colors.grey,
-                      // height: 800,
-                      // constraints: BoxConstraints(
-                      //     maxWidth: 800,
-                      //     maxHeight: 600,
-                      //     minWidth: 300,
-                      //     minHeight: 400),
                       child: Transform.scale(
                         scale: 1.2,
                         child: Lottie.asset(
-                            animate: true,
-
-                            // alignment: Alignment.center,
-
-                            // height: context.screenHeight * 0.4,
-
-                            'assets/json/home_lottie.json'),
+                            animate: true, 'assets/json/home_lottie.json'),
                       ),
                     ),
                   )
@@ -307,7 +297,7 @@ class WebScreenLayout extends HookConsumerWidget {
                                   alignment: Alignment.topLeft,
                                   child: Text(
                                     "Who I Am?",
-                                    style: TextStyle(
+                                    style: GoogleFonts.openSans(
                                       fontSize: 27,
                                       color: primaryColor,
                                       fontWeight: FontWeight.bold,
@@ -353,10 +343,13 @@ class WebScreenLayout extends HookConsumerWidget {
                                             backgroundColor: Colors.white,
                                             surfaceTintColor: Colors.white,
                                             foregroundColor: primaryColor),
-                                        onPressed: () {},
-                                        child: const Text(
+                                        onPressed: () async {
+                                          launchUrl(Uri.parse(
+                                              "https://drive.google.com/file/d/1Fb-qefjDj4tPPfjtf3w9x5kY8itqzNCR/view"));
+                                        },
+                                        child: Text(
                                           "More",
-                                          style: TextStyle(
+                                          style: GoogleFonts.openSans(
                                             fontSize: 20,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -416,55 +409,21 @@ class FindMe extends StatelessWidget {
       mainAxisAlignment:
           isbottom ? MainAxisAlignment.center : MainAxisAlignment.start,
       children: [
-        // Container(
-        //   child: Column(
-        //     children: [
-        //       TextButton(
-        //         // icon: Icon(
-        //         //   Icons.home,
-        //         //   color: Colors.orange,
-        //         // ),
-        //         onPressed: () {},
-        //         child: Text(
-        //           "Home",
-        //           style: GoogleFonts.openSans(color: Colors.white),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
         ContactIcon(
             icon: FontAwesomeIcons.github,
-            onPressed: () {
-              () async {
-                const String url =
-                    "https://github.com/agiratech-madhan?tab=repositories";
+            onPressed: () async {
+              const String url =
+                  "https://github.com/agiratech-madhan?tab=repositories";
 
-                await launchUrl(Uri.parse(url));
-              };
+              await launchUrl(Uri.parse(url));
             }),
-
         ContactIcon(
             icon: FontAwesomeIcons.linkedin,
-            onPressed: () {
-              () async {
-                await launchUrl(
-                  Uri.parse("https://www.linkedin.com/in/madhan-k-/"),
-                );
-              };
+            onPressed: () async {
+              await launchUrl(
+                Uri.parse("https://www.linkedin.com/in/madhan-k-/"),
+              );
             }),
-
-        // IconButton(
-        //   icon: const FaIcon(
-        //     FontAwesomeIcons.linkedin,
-        //   ),
-        //   onPressed: () async {
-        //     await launchUrl(
-        //       Uri.parse(
-        //           "https://www.linkedin.com/in/madhan-k-/"),
-        //     );
-        //   },
-        // ),
         ContactIcon(
             icon: Icons.email_outlined,
             onPressed: () async {
@@ -485,13 +444,6 @@ class FindMe extends StatelessWidget {
 
               await launchUrl(emailLaunchUri);
             }),
-
-        // IconButton(
-        //   icon: const FaIcon(
-        //     FontAwesomeIcons.instagram,
-        //   ),
-        //   onPressed: () {},
-        // ),
       ],
     );
   }

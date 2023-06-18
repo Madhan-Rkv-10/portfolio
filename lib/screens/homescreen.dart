@@ -12,6 +12,7 @@ import 'package:madhan_portfolio/ui_utils/async_data.dart';
 import 'package:madhan_portfolio/ui_utils/common_checkbox.dart';
 import 'package:madhan_portfolio/ui_utils/common_icon.dart';
 import 'package:madhan_portfolio/utils/src/helpers/ui_dimens.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../controller/data_controller.dart';
 import '../ui_utils/common_appbar.dart';
@@ -23,7 +24,9 @@ class ScreenA extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: CommonAppBar(),
+      appBar: CommonAppBar(
+        title: "Madhan",
+      ),
       body: SingleChildScrollView(
           child: AsyncValueWidget(
               value: ref.watch(resumeDataProvider),
@@ -38,11 +41,12 @@ class ScreenA extends HookConsumerWidget {
                             text: TextSpan(children: [
                           TextSpan(
                             text: "Hi,I'm ",
-                            style: TextStyle(fontSize: 30, color: Colors.black),
+                            style: GoogleFonts.openSans(
+                                fontSize: 30, color: Colors.black),
                           ),
                           TextSpan(
                             text: data.data?.name.toString(),
-                            style: TextStyle(
+                            style: GoogleFonts.openSans(
                                 fontSize: 30,
                                 color: primaryColor,
                                 fontWeight: FontWeight.bold),
@@ -51,7 +55,7 @@ class ScreenA extends HookConsumerWidget {
 
                         // Text(
                         //   "Hi, I'm Madhan",
-                        //   style: TextStyle(
+                        //   style: GoogleFonts.openSans(
                         //       fontSize: 30, color:primaryColor),
                         // ),
 
@@ -59,7 +63,8 @@ class ScreenA extends HookConsumerWidget {
                     Gap(15),
                     Text(
                       "A Flutter Developer",
-                      style: TextStyle(fontSize: 16),
+                      style: GoogleFonts.openSans(
+                          fontSize: 18, fontWeight: FontWeight.w500),
                     )
                         .animate(onPlay: (controller) => controller.repeat())
                         .shimmer(duration: 1200.ms, color: primaryColor)
@@ -69,42 +74,57 @@ class ScreenA extends HookConsumerWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    AnimatedTextKit(
-                      isRepeatingAnimation: false,
-
-                      animatedTexts: [
-                        // TypewriterAnimatedText(
-                        //   "  I am a passionate Flutter developer who thrives on coding and continuously updating my skills. With a deep love for problem-solving, I am driven to achieve challenging targets , I am excited about the future possibilities in mobile app development.",
-                        //   textAlign: TextAlign.center,
-                        // ),
-
-                        TypewriterAnimatedText(
-                            textAlign: TextAlign.center,
-                            "Passionate Flutter developer with a knack for creating sleek and functional mobile applications.")
-                      ],
-                      // onTap: () {
-                      //   print("Tap Event");
-                      // },
-                    ),
+                    Text(
+                        "Passionate Flutter developer with a knack for creating sleek and functional mobile applications.",
+                        style: GoogleFonts.openSans(fontSize: 14)),
                     const SizedBox(
                       height: 15,
                     ),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Who I Am?",
-                        style: TextStyle(
-                            fontSize: 27,
-                            color: primaryColor,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    // Align(
+                    //   alignment: Alignment.topLeft,
+                    //   child: Text(
+                    //     "Who I Am?",
+                    //     style: GoogleFonts.openSans(
+                    //         fontSize: 27,
+                    //         color: primaryColor,
+                    //         fontWeight: FontWeight.bold),
+                    //   ),
+                    // ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Who I Am?",
+                          style: GoogleFonts.openSans(
+                              fontSize: 22,
+                              color: primaryColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            launchUrl(Uri.parse(
+                                "https://drive.google.com/file/d/1Fb-qefjDj4tPPfjtf3w9x5kY8itqzNCR/view"));
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: primaryColor,
+                              foregroundColor: Colors.white,
+                              shadowColor: primaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8))),
+                          child: const Text(
+                            "More Info",
+                            // style: GoogleFonts.openSans(color: primaryColor),
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
-                      "   I am a passionate Flutter developer from Chennai, who thrives on coding and continuously updating my skills. With a deep love for problem-solving, I am driven to achieve challenging targets , I am excited about the future possibilities in mobile app development.",
+                      "   I am a passionate Flutter developer from Chennai, who thrives on coding and continuously updating my skills. With a deep love for problem-solving, I am driven to achieve challenging targets,I am excited about the future possibilities in mobile app development.",
                       softWrap: true,
                       textAlign: TextAlign.justify,
                       style: GoogleFonts.openSans(
-                          fontSize: 25, color: Colors.pink),
+                          fontSize: 18, color: Colors.black),
                     )
                         .animate()
                         .fadeIn(duration: 900.ms, delay: 300.ms)
@@ -116,218 +136,23 @@ class ScreenA extends HookConsumerWidget {
                     SizedBox(
                       height: 8,
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: primaryColor,
-                          foregroundColor: Colors.white,
-                          shadowColor: primaryColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8))),
-                      child: Text(
-                        "Download Resume",
-                        // style: GoogleFonts.openSans(color: primaryColor),
-                      ),
-                    ),
+
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(
                         "Technical Skills",
-                        style: TextStyle(
-                          fontSize: 27,
+                        style: GoogleFonts.openSans(
+                          fontSize: 22,
                           color: primaryColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-
                     SkillsSection(
                       skills: data.data?.languages ?? [],
                     )
-
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                    //   child: PhysicalModel(
-                    //       color: Colors.white,
-                    //       elevation: 5,
-                    //       borderRadius: BorderRadius.circular(8),
-                    //       shape: BoxShape.rectangle,
-                    //       child: ExpansionTile(
-                    //         title: Text("Languages"),
-                    //         children: [
-                    //           const Divider(
-                    //             thickness: 1.0,
-                    //             height: 1.0,
-                    //           ),
-                    //           ConstrainedBox(
-                    //               constraints: const BoxConstraints(),
-                    //               child: Column(
-                    //                 mainAxisSize: MainAxisSize.min,
-                    //                 children: [
-                    //                   CommonCheckBox(text: "Dart"),
-                    //                   CommonCheckBox(text: "HTML"),
-                    //                   CommonCheckBox(text: "CSS"),
-                    //                   CommonCheckBox(text: "JS"),
-                    //                   CommonCheckBox(text: "Python"),
-                    //                   CommonCheckBox(text: "Java"),
-
-                    //                   // Container(
-                    //                   //   margin: EdgeInsets.all(5),
-                    //                   //   child: Row(
-                    //                   //       mainAxisAlignment:
-                    //                   //           MainAxisAlignment.spaceBetween,
-                    //                   //       //  mainAxisSize: Main,
-                    //                   //       children: [
-                    //                   //         // Container(
-                    //                   //         //   width: 6,
-                    //                   //         //   height: 40,
-                    //                   //         //   decoration: BoxDecoration(
-                    //                   //         //       color: Colors.blue,
-                    //                   //         //       borderRadius: BorderRadius.only(
-                    //                   //         //           topRight: Radius.circular(10),
-                    //                   //         //           bottomRight:
-                    //                   //         //               Radius.circular(10))),
-                    //                   //         //   child: Text(''),
-                    //                   //         // ),
-                    //                   //         // Container(
-                    //                   //         //   child: Text("Dart"),
-                    //                   //         // )
-                    //                   //       ]),
-                    //                   // )
-                    //                 ],
-                    //               ))
-                    //         ],
-                    //       )),
-                    // ),
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                    //   child: PhysicalModel(
-                    //       color: Colors.white,
-                    //       elevation: 5,
-                    //       borderRadius: BorderRadius.circular(8),
-                    //       shape: BoxShape.rectangle,
-                    //       child: ExpansionTile(
-                    //         title: Text("Framework"),
-                    //         children: [
-                    //           const Divider(
-                    //             thickness: 1.0,
-                    //             height: 1.0,
-                    //           ),
-                    //           ConstrainedBox(
-                    //               constraints: const BoxConstraints(),
-                    //               child: Column(
-                    //                 mainAxisSize: MainAxisSize.min,
-                    //                 children: [
-                    //                   CommonCheckBox(text: "Flutter"),
-
-                    //                   // Container(
-                    //                   //   margin: EdgeInsets.all(5),
-                    //                   //   child: Row(
-                    //                   //       mainAxisAlignment:
-                    //                   //           MainAxisAlignment.spaceBetween,
-                    //                   //       //  mainAxisSize: Main,
-                    //                   //       children: [
-                    //                   //         // Container(
-                    //                   //         //   width: 6,
-                    //                   //         //   height: 40,
-                    //                   //         //   decoration: BoxDecoration(
-                    //                   //         //       color: Colors.blue,
-                    //                   //         //       borderRadius: BorderRadius.only(
-                    //                   //         //           topRight: Radius.circular(10),
-                    //                   //         //           bottomRight:
-                    //                   //         //               Radius.circular(10))),
-                    //                   //         //   child: Text(''),
-                    //                   //         // ),
-                    //                   //         // Container(
-                    //                   //         //   child: Text("Dart"),
-                    //                   //         // )
-                    //                   //       ]),
-                    //                   // )
-                    //                 ],
-                    //               ))
-                    //         ],
-                    //       )),
-                    // ),
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                    //   child: PhysicalModel(
-                    //       color: Colors.white,
-                    //       elevation: 5,
-                    //       borderRadius: BorderRadius.circular(8),
-                    //       shape: BoxShape.rectangle,
-                    //       child: ExpansionTile(
-                    //         title: Text("DataBase"),
-                    //         children: [
-                    //           const Divider(
-                    //             thickness: 1.0,
-                    //             height: 1.0,
-                    //           ),
-                    //           ConstrainedBox(
-                    //               constraints: const BoxConstraints(),
-                    //               child: Column(
-                    //                 mainAxisSize: MainAxisSize.min,
-                    //                 children: [
-                    //                   CommonCheckBox(text: "Hive"),
-                    //                   CommonCheckBox(text: "SqlLite"),
-                    //                   CommonCheckBox(text: "SqlServer"),
-                    //                   CommonCheckBox(text: "Cloud Firestore"),
-
-                    //                   // Container(
-                    //                   //   margin: EdgeInsets.all(5),
-                    //                   //   child: Row(
-                    //                   //       mainAxisAlignment:
-                    //                   //           MainAxisAlignment.spaceBetween,
-                    //                   //       //  mainAxisSize: Main,
-                    //                   //       children: [
-                    //                   //         // Container(
-                    //                   //         //   width: 6,
-                    //                   //         //   height: 40,
-                    //                   //         //   decoration: BoxDecoration(
-                    //                   //         //       color: Colors.blue,
-                    //                   //         //       borderRadius: BorderRadius.only(
-                    //                   //         //           topRight: Radius.circular(10),
-                    //                   //         //           bottomRight:
-                    //                   //         //               Radius.circular(10))),
-                    //                   //         //   child: Text(''),
-                    //                   //         // ),
-                    //                   //         // Container(
-                    //                   //         //   child: Text("Dart"),
-                    //                   //         // )
-                    //                   //       ]),
-                    //                   // )
-                    //                 ],
-                    //               ))
-                    //         ],
-                    //       )),
-                    // ),
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                    //   child: PhysicalModel(
-                    //       color: Colors.white,
-                    //       elevation: 5,
-                    //       borderRadius: BorderRadius.circular(8),
-                    //       shape: BoxShape.rectangle,
-                    //       child: ExpansionTile(
-                    //         title: Text("Services"),
-                    //         children: [
-                    //           const Divider(
-                    //             thickness: 1.0,
-                    //             height: 1.0,
-                    //           ),
-                    //           ConstrainedBox(
-                    //               constraints: const BoxConstraints(),
-                    //               child: Column(
-                    //                 mainAxisSize: MainAxisSize.min,
-                    //                 children: [
-                    //                   CommonCheckBox(text: "REST API"),
-                    //                   CommonCheckBox(text: "Firebase"),
-                    //                 ],
-                    //               ))
-                    //         ],
-                    //       )),
-                    // )
                   ],
-                ).paddingAll(8);
+                ).paddingAll(13);
               })),
     );
   }

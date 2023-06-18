@@ -64,7 +64,8 @@
                 ],
                 "features": [
                     "Riverpod",
-                    "Paytm, REST API",
+                    "Paytm",
+                    " REST API",
                     "FCM"
                 ],
                 "authetication": [],
@@ -88,7 +89,7 @@
                 ],
                 "languages": [
                     "Flutter",
-                    " Dart"
+                    "Dart"
                 ],
                 "features": [
                     "Firebase",
@@ -99,7 +100,9 @@
                     "Facebook"
                 ],
                 "images": [
-                    "assets/project_assets/todo_filter.png"
+                    "assets/project_assets/insta_login.png",
+                    "assets/project_assets/insta_home.png",
+                    "assets/project_assets/insta_search.png"
                 ],
                 "source_code": "https://github.com/agiratech-madhan/instagram_clone"
             },
@@ -123,7 +126,10 @@
                 ],
                 "authetication": [],
                 "images": [
-                    "assets/project_assets/todo_filter.png"
+                    "assets/project_assets/movie_home.png",
+                    "assets/project_assets/movie_filter.png",
+                    "assets/project_assets/movie_search.png",
+                    "assets/project_assets/movie_find.png"
                 ],
                 "source_code": "https://github.com/agiratech-madhan/instagram_clone"
             },
@@ -147,7 +153,10 @@
                 ],
                 "authetication": [],
                 "images": [
-                    "assets/project_assets/todo_filter.png"
+                    "assets/project_assets/todo_filter.png",
+                    "assets/project_assets/rodo_new.png",
+                    "assets/project_assets/todo_sort.png",
+                    "assets/project_assets/test.png"
                 ],
                 "source_code": "https://github.com/agiratech-madhan/instagram_clone"
             }

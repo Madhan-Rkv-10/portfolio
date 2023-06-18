@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CommonTextField extends TextField {
+class CommonTextField extends StatelessWidget {
   const CommonTextField({super.key}) : super();
   @override
   Widget build(BuildContext context) {
@@ -10,8 +10,8 @@ class CommonTextField extends TextField {
       style: GoogleFonts.openSans(color: Colors.white, fontSize: 17),
       decoration: InputDecoration(
           hintText: 'Enter Your Name',
-          hintStyle: TextStyle(color: Colors.white),
-          labelStyle: TextStyle(color: Colors.white),
+          hintStyle: GoogleFonts.openSans(color: Colors.white),
+          labelStyle: GoogleFonts.openSans(color: Colors.white),
           filled: true,
           border: OutlineInputBorder(
             borderSide: BorderSide(

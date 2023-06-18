@@ -93,7 +93,7 @@ class ProjectWeb extends HookConsumerWidget {
 //               color: Colors.black,
 //               child: Text(
 //                 "data",
-//                 style: TextStyle(fontSize: 40, color: Colors.black),
+//                 style: GoogleFonts.openSans(fontSize: 40, color: Colors.black),
 //               ),
 //             ),
 //           )
@@ -162,7 +162,7 @@ class _ProjectWebCardState extends ConsumerState<ProjectWebCard> {
                           children: [
                             Text(
                               widget.project.title.toString(),
-                              style: TextStyle(
+                              style: GoogleFonts.openSans(
                                 color: Colors.white,
                                 fontSize: 19,
                                 fontWeight: FontWeight.w500,

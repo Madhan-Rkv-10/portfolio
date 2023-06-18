@@ -88,7 +88,7 @@ class SimpleDialogWidget extends HookConsumerWidget {
                               child: Text(
                                 e.toString(),
                               ),
-                            ).paddingSymmetric(horizontal: 15),
+                            ).paddingSymmetric(horizontal: 15, vertical: 8),
                           )
                           .toList(),
                     ),

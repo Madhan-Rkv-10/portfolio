@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:madhan_portfolio/screens/contacts.dart';
 import 'package:madhan_portfolio/ui_utils/common_icon.dart';
 import 'package:madhan_portfolio/utils/src/helpers/ui_dimens.dart';
@@ -23,7 +24,7 @@ class CommonAppBar extends AppBar {
             ).paddingOnly(left: 5),
             title: Text(
               title ?? '',
-              style: TextStyle(color: Colors.white),
+              style: GoogleFonts.openSans(color: Colors.white),
             ),
             // shape: RoundedRectangleBorder(
             //     borderRadius: BorderRadius.only(

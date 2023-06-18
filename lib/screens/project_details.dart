@@ -14,13 +14,11 @@ import 'package:madhan_portfolio/ui_utils/common_elevated_button.dart';
 import 'package:madhan_portfolio/utils/src/helpers/ui_dimens.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../model/data_model.dart';
-
-List<String> sam = ["a", "b"];
-List<String> descriptions = [
-  'SAMmmsa fsdnfsdnfsifs sfnsdif fsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifs',
-  "THis Project Containsbufsufbsdf"
-];
+// List<String> sam = ["a", "b"];
+// List<String> descriptions = [
+//   'SAMmmsa fsdnfsdnfsifs sfnsdif fsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifsfsdnfsdnfsifs',
+//   "THis Project Containsbufsufbsdf"
+// ];
 
 class ProjectDetails extends HookConsumerWidget {
   final String id;
@@ -59,7 +57,7 @@ class ProjectDetails extends HookConsumerWidget {
                 Icons.arrow_back,
                 color: Colors.white,
               )),
-          title: Text(title, style: TextStyle(color: Colors.white)),
+          title: Text(title, style: GoogleFonts.openSans(color: Colors.white)),
         ),
         body: AsyncValueWidget(
             value: ref.watch(resumeDataProvider),
@@ -82,13 +80,14 @@ class ProjectDetails extends HookConsumerWidget {
                           aspectRatio: 1,
                           child: PageView.builder(
                               controller: pageViewController,
-                              itemCount: sam.length,
+                              itemCount: projectdata!.images!.length,
                               findChildIndexCallback: (Key key) {
                                 for (int index = 0;
-                                    index < sam.length;
+                                    index < projectdata!.images!.length;
                                     index++) {
                                   print("1");
-                                  if (sam[index] == key.toString()) {
+                                  if (projectdata.images![index] ==
+                                      key.toString()) {
                                     print("object");
                                     return index;
                                   }
@@ -104,7 +103,7 @@ class ProjectDetails extends HookConsumerWidget {
                               itemBuilder: (context, index) {
                                 return Center(
                                   child: Container(
-                                      key: Key(sam[index]),
+                                      key: Key(projectdata.images![index]),
                                       padding: EdgeInsets.all(8),
                                       child: Image.asset(
                                           "assets/project_assets/todo_filter.png")
@@ -123,13 +122,13 @@ class ProjectDetails extends HookConsumerWidget {
                             selectedIndexState.value = index;
                             pageViewController.animateToPage(
                               selectedIndexState.value,
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               curve: Curves.ease,
                             );
                           },
-                          count: sam.length,
+                          count: projectdata.images!.length,
                           effect: ColorTransitionEffect(
-                              activeDotColor: Colors.purple.shade100,
+                              activeDotColor: primaryColor,
                               dotWidth: UIDimens.size13,
                               dotHeight: UIDimens.size13),
                         ),
@@ -139,7 +138,7 @@ class ProjectDetails extends HookConsumerWidget {
                               alignment: Alignment.topLeft,
                               child: Text(
                                 "Project Details",
-                                style: TextStyle(
+                                style: GoogleFonts.openSans(
                                     fontSize: 20,
                                     color: Color.fromARGB(255, 18, 79, 124),
                                     fontWeight: FontWeight.bold),
@@ -154,7 +153,7 @@ class ProjectDetails extends HookConsumerWidget {
                               alignment: Alignment.topLeft,
                               child: Text(
                                 "Languages ",
-                                style: TextStyle(
+                                style: GoogleFonts.openSans(
                                     fontSize: 20,
                                     color: Color.fromARGB(255, 18, 79, 124),
                                     fontWeight: FontWeight.bold),
@@ -169,7 +168,7 @@ class ProjectDetails extends HookConsumerWidget {
                               alignment: Alignment.topLeft,
                               child: Text(
                                 "Features",
-                                style: TextStyle(
+                                style: GoogleFonts.openSans(
                                     fontSize: 20,
                                     color: Color.fromARGB(255, 18, 79, 124),
                                     fontWeight: FontWeight.bold),
@@ -221,7 +220,7 @@ class DescriptionsTile extends StatelessWidget {
         Expanded(
           child: Text(
             description,
-            style: TextStyle(fontSize: 16),
+            style: GoogleFonts.openSans(fontSize: 16),
           ), //text
         )
       ],

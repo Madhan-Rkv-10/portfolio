@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:madhan_portfolio/screens/contacts.dart';
 
 class AsyncValueWidget<T> extends StatelessWidget {
   const AsyncValueWidget({super.key, required this.value, required this.data});
@@ -27,8 +28,11 @@ class AsyncValueSliverWidget<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return value.when(
       data: data,
-      loading: () => const SliverToBoxAdapter(
-          child: Center(child: CircularProgressIndicator())),
+      loading: () => SliverToBoxAdapter(
+          child: Center(
+              child: CircularProgressIndicator(
+        color: primaryColor,
+      ))),
       error: (e, st) => SliverToBoxAdapter(
         child: Center(child: ErrorMessageWidget(e.toString())),
       ),

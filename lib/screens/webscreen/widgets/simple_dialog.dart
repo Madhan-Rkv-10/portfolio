@@ -93,32 +93,33 @@ class SimpleDialogWidget extends HookConsumerWidget {
                           .toList(),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Container(
-                      height: 50,
-                      margin: EdgeInsets.all(15),
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                  if (sourceCode != 'none')
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        height: 50,
+                        margin: EdgeInsets.all(15),
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                             ),
-                          ),
-                          onPressed: () async {
-                            // Future<void> _launchUniversalLinkIos(Uri url) async {
-                            await launchUrl(
-                              Uri.parse(sourceCode),
-                            );
-                            // if (!nativeAppLaunchSucceeded) {
-                            //   await launchUrl(
-                            //     Uri.parse(sourceCode),
-                            //   );
-                            // }
-                            // }
-                          },
-                          child: Text("Source Code")),
-                    ),
-                  )
+                            onPressed: () async {
+                              // Future<void> _launchUniversalLinkIos(Uri url) async {
+                              await launchUrl(
+                                Uri.parse(sourceCode),
+                              );
+                              // if (!nativeAppLaunchSucceeded) {
+                              //   await launchUrl(
+                              //     Uri.parse(sourceCode),
+                              //   );
+                              // }
+                              // }
+                            },
+                            child: Text("Source Code")),
+                      ),
+                    )
                 ],
               )),
         ));

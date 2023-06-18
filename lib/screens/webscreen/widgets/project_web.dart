@@ -189,9 +189,7 @@ class _ProjectWebCardState extends ConsumerState<ProjectWebCard> {
                                       context: context,
                                       builder: (context) {
                                         return SimpleDialogWidget(
-                                            images: const [
-                                              "assets/project_assets/bitstamp.png"
-                                            ],
+                                            images: widget.project.images ?? [],
                                             technologies:
                                                 widget.project.languages!,
                                             sourceCode:

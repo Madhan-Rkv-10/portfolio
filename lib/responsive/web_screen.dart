@@ -81,7 +81,7 @@ class WebScreenLayout extends HookConsumerWidget {
                   ),
                   TextButton(
                       onPressed: () {
-                        scrollToTopPercentage(scrollController, 0.25);
+                        scrollToTopPercentage(scrollController, 0.3);
                       },
                       child: Text(
                         "About",
@@ -437,7 +437,7 @@ class FindMe extends StatelessWidget {
             icon: FontAwesomeIcons.github,
             onPressed: () {
               () async {
-                final String url =
+                const String url =
                     "https://github.com/agiratech-madhan?tab=repositories";
 
                 await launchUrl(Uri.parse(url));

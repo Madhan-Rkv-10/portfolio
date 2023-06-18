@@ -84,6 +84,7 @@ flutter:
     - assets/images/
     - assets/json/
     - assets/project_assets/
+    - assets/project_assets/dpinks/
 
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

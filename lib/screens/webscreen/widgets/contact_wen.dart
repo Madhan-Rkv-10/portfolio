@@ -17,74 +17,75 @@ class ContactSection extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-        constraints: BoxConstraints(
-          maxWidth: 1400,
-        ),
-        margin: const EdgeInsets.only(top: 30),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 8,
-              color: primaryColor,
-              offset: Offset(0, 2),
-            )
-          ],
-          borderRadius: BorderRadius.circular(10),
-          // border: Border.all(color: primaryColor)
-        ),
-        child: Row(
-          // mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: Column(
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Lets Built Something better",
-                        style: GoogleFonts.openSans(
-                            fontSize: 20, color: Colors.black),
-                      ),
-                      Text(
-                        "Together",
-                        style: GoogleFonts.openSans(
-                            fontSize: 20, color: Colors.black),
-                      ),
-                    ],
-                  ),
-                  Container(
-                      width: 500,
-                      // height: 600,
-                      child: Lottie.asset('assets/json/contact.json')),
-                  Text(
-                    "K.Madhan",
-                    style:
-                        GoogleFonts.openSans(fontSize: 20, color: primaryColor),
-                  ),
-                  Text(
-                    "A Flutter Developer",
-                    style:
-                        GoogleFonts.openSans(fontSize: 20, color: Colors.black),
-                  ),
-                  FindMe(isbottom: true)
-                ],
-              ),
+      constraints: BoxConstraints(
+        maxWidth: 1400,
+      ),
+      margin: const EdgeInsets.only(top: 30),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 8,
+            color: primaryColor,
+            offset: Offset(0, 2),
+          )
+        ],
+        borderRadius: BorderRadius.circular(10),
+        // border: Border.all(color: primaryColor)
+      ),
+      child: Row(
+        // mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Lets Built Something better",
+                      style: GoogleFonts.openSans(
+                          fontSize: 20, color: Colors.black),
+                    ),
+                    Text(
+                      "Together",
+                      style: GoogleFonts.openSans(
+                          fontSize: 20, color: Colors.black),
+                    ),
+                  ],
+                ),
+                Container(
+                    width: 500,
+                    // height: 600,
+                    child: Lottie.asset('assets/json/contact.json')),
+                Text(
+                  "K.Madhan",
+                  style:
+                      GoogleFonts.openSans(fontSize: 20, color: primaryColor),
+                ),
+                Text(
+                  "A Flutter Developer",
+                  style:
+                      GoogleFonts.openSans(fontSize: 20, color: Colors.black),
+                ),
+                FindMe(isbottom: true)
+              ],
             ),
-            Expanded(
-              child: Form(key: _formKey, child: ContactForm(formkey: _formKey)),
-            )
-          ],
-        ));
+          ),
+          Expanded(
+            child: Form(key: _formKey, child: ContactForm(formkey: _formKey)),
+          )
+        ],
+      ),
+    );
   }
 }
 
 InputDecoration commonDecoration(String value) {
   return InputDecoration(
       hintText: value,
-      hintStyle: TextStyle(color: Colors.white),
+      hintStyle: GoogleFonts.openSans(color: Colors.white),
       filled: true,
       border: OutlineInputBorder(
         borderSide: BorderSide(

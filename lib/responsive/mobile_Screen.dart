@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:madhan_portfolio/utils/src/extensions/color_extension.dart';
 
 import '../screens/contacts.dart';
 
@@ -18,7 +17,7 @@ class MobileScreenLayout extends HookConsumerWidget {
       body: child,
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: primaryColor,
-        items: <BottomNavigationBarItem>[
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
@@ -44,13 +43,13 @@ class MobileScreenLayout extends HookConsumerWidget {
   static int _calculateSelectedIndex(BuildContext context, String location) {
     // return switch (location) { '/a' => 0, '/b' => 1, '/c' => 2, _ => 0 };
     final String location = GoRouterState.of(context).location;
-    if (location.startsWith('/a')) {
+    if (location.startsWith('/home')) {
       return 0;
     }
-    if (location.startsWith('/b')) {
+    if (location.startsWith('/projects')) {
       return 1;
     }
-    if (location.startsWith('/c')) {
+    if (location.startsWith('/profile')) {
       return 2;
     }
     return 0;
@@ -59,13 +58,13 @@ class MobileScreenLayout extends HookConsumerWidget {
   void _onItemTapped(int index, BuildContext context) {
     switch (index) {
       case 0:
-        GoRouter.of(context).go('/a');
+        GoRouter.of(context).go('/home');
         break;
       case 1:
-        GoRouter.of(context).go('/b');
+        GoRouter.of(context).go('/projects');
         break;
       case 2:
-        GoRouter.of(context).go('/c');
+        GoRouter.of(context).go('/profile');
         break;
     }
   }

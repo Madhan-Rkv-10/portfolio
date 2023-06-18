@@ -26,7 +26,7 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
 
 final GoRouter goRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/a',
+  initialLocation: '/home',
   debugLogDiagnostics: true,
   routes: <RouteBase>[
     /// Application shell
@@ -42,7 +42,7 @@ final GoRouter goRouter = GoRouter(
       routes: <RouteBase>[
         /// The first screen to display in the bottom navigation bar.
         GoRoute(
-          path: '/a',
+          path: '/home',
           name: AppRoute.home.name,
           builder: (BuildContext context, GoRouterState state) {
             return const ScreenA();
@@ -64,7 +64,7 @@ final GoRouter goRouter = GoRouter(
         /// Displayed when the second item in the the bottom navigation bar is
         /// selected.
         GoRoute(
-          path: '/b',
+          path: '/projects',
           name: AppRoute.about.name,
           builder: (BuildContext context, GoRouterState state) {
             return const ScreenB();
@@ -87,7 +87,7 @@ final GoRouter goRouter = GoRouter(
 
         /// The third screen to display in the bottom navigation bar.
         GoRoute(
-          path: '/c',
+          path: '/profile',
           name: AppRoute.contact.name,
           builder: (BuildContext context, GoRouterState state) {
             return const ScreenC();

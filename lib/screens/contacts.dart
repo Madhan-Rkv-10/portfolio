@@ -37,9 +37,9 @@ class ScreenC extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
-        title: const Text(
+        title: Text(
           "Contact ",
-          style: TextStyle(color: Colors.white),
+          style: GoogleFonts.openSans(color: Colors.white),
         ),
         actions: [
           CommonIcon(
@@ -301,7 +301,7 @@ class FormTitle extends StatelessWidget {
         alignment: Alignment.topLeft,
         child: Text(
           title,
-          style: TextStyle(
+          style: GoogleFonts.openSans(
               fontSize: 18,
               color: isWeb ? Colors.black : primaryColor,
               fontWeight: FontWeight.w500),

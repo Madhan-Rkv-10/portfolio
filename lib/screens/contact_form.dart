@@ -75,7 +75,7 @@ class ContactForm extends HookConsumerWidget {
         //     },
         //     controller: nameController,
         //     textInputAction: TextInputAction.next,
-        //     style: TextStyle(fontSize: 18, color: Colors.black),
+        //     style: GoogleFonts.openSans(fontSize: 18, color: Colors.black),
         //     decoration: InputDecoration(
         //       // hintText: 'Hi',
         //       contentPadding:
@@ -118,7 +118,7 @@ class ContactForm extends HookConsumerWidget {
         //     },
         //     keyboardType: TextInputType.name,
         //     textInputAction: TextInputAction.next,
-        //     style: TextStyle(fontSize: 18),
+        //     style: GoogleFonts.openSans(fontSize: 18),
         //     decoration: InputDecoration(
         //       contentPadding:
         //           EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
@@ -169,7 +169,7 @@ class ContactForm extends HookConsumerWidget {
         //     controller: phoneNumberController,
         //     keyboardType: TextInputType.number,
         //     textInputAction: TextInputAction.next,
-        //     style: TextStyle(fontSize: 18),
+        //     style: GoogleFonts.openSans(fontSize: 18),
         //     validator: (value) {
         //       // Check if this field is empty
         // if (value == null || value.isEmpty) {

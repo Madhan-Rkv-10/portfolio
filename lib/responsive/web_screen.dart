@@ -345,7 +345,7 @@ class WebScreenLayout extends HookConsumerWidget {
                                             foregroundColor: primaryColor),
                                         onPressed: () async {
                                           launchUrl(Uri.parse(
-                                              "https://drive.google.com/file/d/1Fb-qefjDj4tPPfjtf3w9x5kY8itqzNCR/view"));
+                                              "https://drive.google.com/file/d/1z6dOXS3w9MdJxOO5jstnGoYsQ_qwdpba/view?usp=sharing"));
                                         },
                                         child: Text(
                                           "More",

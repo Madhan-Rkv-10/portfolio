@@ -184,22 +184,29 @@ class _ProjectWebCardState extends ConsumerState<ProjectWebCard> {
                                     foregroundColor: Colors.black,
                                     surfaceTintColor: Colors.white),
                                 onPressed: () {
-                                  // Navigator.push(context, ())
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return SimpleDialogWidget(
-                                            images: widget.project.images ?? [],
-                                            technologies:
-                                                widget.project.languages!,
-                                            sourceCode:
-                                                widget.project.sourceCode!,
-                                            description:
-                                                widget.project.description!,
-                                            features:
-                                                widget.project.features ?? [],
-                                            title: widget.project.title!);
+                                  context.goNamed(AppRoute.projectDetails.name,
+                                      pathParameters: {
+                                        "id": widget.project.id.toString(),
+                                      },
+                                      queryParameters: {
+                                        "title": widget.project.title.toString()
                                       });
+                                  // Navigator.push(context, ())
+                                  // showDialog(
+                                  //     context: context,
+                                  //     builder: (context) {
+                                  //       return SimpleDialogWidget(
+                                  //           images: widget.project.images ?? [],
+                                  //           technologies:
+                                  //               widget.project.languages!,
+                                  //           sourceCode:
+                                  //               widget.project.sourceCode!,
+                                  //           description:
+                                  //               widget.project.description!,
+                                  //           features:
+                                  //               widget.project.features ?? [],
+                                  //           title: widget.project.title!);
+                                  //     });
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,

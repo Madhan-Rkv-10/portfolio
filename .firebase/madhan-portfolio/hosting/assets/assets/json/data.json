@@ -122,7 +122,8 @@
                 ],
                 "features": [
                     "REST API",
-                    "Riverpod"
+                    "Riverpod",
+                    "GoRouter"
                 ],
                 "authetication": [],
                 "images": [
@@ -154,7 +155,7 @@
                 "authetication": [],
                 "images": [
                     "assets/project_assets/todo_filter.png",
-                    "assets/project_assets/rodo_new.png",
+                    "assets/project_assets/todo_new.png",
                     "assets/project_assets/todo_sort.png",
                     "assets/project_assets/test.png"
                 ],

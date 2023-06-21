@@ -24,7 +24,7 @@ class SkillsCard extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 250,
+          height: 300,
           width: width,
           decoration: BoxDecoration(
               color: Color(0xff0E5A9D),

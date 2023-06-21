@@ -7,12 +7,15 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:madhan_portfolio/controller/data_controller.dart';
+import 'package:madhan_portfolio/responsive/web_screen.dart';
+import 'package:madhan_portfolio/router/app_router.dart';
 import 'package:madhan_portfolio/screens/contacts.dart';
 import 'package:madhan_portfolio/screens/widgets/languages_section.dart';
 import 'package:madhan_portfolio/ui_utils/async_data.dart';
 import 'package:madhan_portfolio/ui_utils/common_elevated_button.dart';
 import 'package:madhan_portfolio/utils/src/helpers/ui_dimens.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // List<String> sam = ["a", "b"];
 // List<String> descriptions = [
@@ -26,8 +29,6 @@ class ProjectDetails extends HookConsumerWidget {
   const ProjectDetails({required this.id, super.key, required this.title});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final projectData = ref.watch(resumeDataProvider);
-
     final selectedIndexState = useState(0);
     final pageViewController = usePageController(initialPage: 1);
     final scrollController = useScrollController();
@@ -51,12 +52,16 @@ class ProjectDetails extends HookConsumerWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: primaryColor,
-          leading: IconButton(
-              onPressed: () => context.pop(),
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              )),
+          leading: context.screenWidth < 600
+              ? IconButton(
+                  onPressed: () {
+                    context.pop();
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ))
+              : SizedBox(),
           title: Text(title, style: GoogleFonts.openSans(color: Colors.white)),
         ),
         body: AsyncValueWidget(
@@ -68,131 +73,164 @@ class ProjectDetails extends HookConsumerWidget {
               final projectdata = data.data?.projects?.elementAt(indexes!);
               return SingleChildScrollView(
                 controller: scrollController,
-                // physics: NeverScrollableScrollPhysics(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    constraints: BoxConstraints(maxWidth: 1000),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        AspectRatio(
-                          aspectRatio: 1,
-                          child: PageView.builder(
-                              controller: pageViewController,
-                              itemCount: projectdata!.images!.length,
-                              findChildIndexCallback: (Key key) {
-                                for (int index = 0;
-                                    index < projectdata!.images!.length;
-                                    index++) {
-                                  print("1");
-                                  if (projectdata.images![index] ==
-                                      key.toString()) {
-                                    print("object");
-                                    return index;
-                                  }
-                                }
-                                print("2");
-
-                                return -1;
-                              },
-                              onPageChanged: (index) {
-                                selectedIndexState.value = index;
-                                print(index);
-                              },
-                              itemBuilder: (context, index) {
-                                return Center(
-                                  child: Container(
-                                      key: Key(projectdata.images![index]),
-                                      padding: EdgeInsets.all(8),
-                                      child: Image.asset(
-                                          "assets/project_assets/todo_filter.png")
-                                      //  Image.network(
-                                      //   "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-12-r1.jpg",
-                                      // ),
-
-                                      ),
-                                );
-                              }),
-                        ),
-                        SmoothPageIndicator(
-                          controller: pageViewController,
-                          // activeIndex: _selectedIndex,
-                          onDotClicked: (index) {
-                            selectedIndexState.value = index;
-                            pageViewController.animateToPage(
-                              selectedIndexState.value,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.ease,
-                            );
-                          },
-                          count: projectdata.images!.length,
-                          effect: ColorTransitionEffect(
-                              activeDotColor: primaryColor,
-                              dotWidth: UIDimens.size13,
-                              dotHeight: UIDimens.size13),
-                        ),
                         Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Project Details",
-                                style: GoogleFonts.openSans(
-                                    fontSize: 20,
-                                    color: Color.fromARGB(255, 18, 79, 124),
-                                    fontWeight: FontWeight.bold),
-                              ),
+                            if (context.screenWidth > 600)
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    projectdata!.title.toString(),
+                                    style: GoogleFonts.openSans(
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  if (projectdata.sourceCode != 'none')
+                                    SizedBox(
+                                      height: 50,
+                                      child: CommonElevatedButton(
+                                          onPressed: () {
+                                            launchUrl(Uri.parse(projectdata
+                                                .sourceCode
+                                                .toString()));
+                                          },
+                                          iconButton: true,
+                                          roundedBorder: false,
+                                          borderRadiuss: 0,
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.white,
+                                              surfaceTintColor: Colors.white,
+                                              foregroundColor: Color.fromARGB(
+                                                  255, 18, 79, 124),
+                                              textStyle: GoogleFonts.openSans(
+                                                  fontSize: 18)),
+                                          icon: const FaIcon(
+                                              FontAwesomeIcons.github),
+                                          text: "View in Github"),
+                                    )
+                                ],
+                              ).paddingSymmetric(vertical: 15),
+                            Container(
+                              // aspectRatio:1.25,
+                              height: (context.screenWidth > 600) ? 700 : 300,
+                              child: PageView.builder(
+                                  controller: pageViewController,
+                                  itemCount: projectdata!.images!.length,
+                                  findChildIndexCallback: (Key key) {
+                                    for (int index = 0;
+                                        index < projectdata.images!.length;
+                                        index++) {
+                                      print("1");
+                                      if (projectdata.images![index] ==
+                                          key.toString()) {
+                                        print("object");
+                                        return index;
+                                      }
+                                    }
+                                    print("2");
+
+                                    return -1;
+                                  },
+                                  onPageChanged: (index) {
+                                    selectedIndexState.value = index;
+                                    print(index);
+                                  },
+                                  itemBuilder: (context, index) {
+                                    return Center(
+                                      child: Container(
+                                          key: Key(projectdata.images![index]),
+                                          padding: EdgeInsets.all(8),
+                                          child: Image.asset(
+                                              projectdata.images![index])
+                                          //  Image.network(
+                                          //   "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-12-r1.jpg",
+                                          // ),
+
+                                          ),
+                                    );
+                                  }),
+                            ),
+                            SmoothPageIndicator(
+                              controller: pageViewController,
+                              // activeIndex: _selectedIndex,
+                              onDotClicked: (index) {
+                                selectedIndexState.value = index;
+                                pageViewController.animateToPage(
+                                  selectedIndexState.value,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.ease,
+                                );
+                              },
+                              count: projectdata.images!.length,
+                              effect: ColorTransitionEffect(
+                                  activeDotColor: primaryColor,
+                                  dotWidth: UIDimens.size13,
+                                  dotHeight: UIDimens.size13),
                             ),
                             Column(
-                              children: projectdata!.description!
-                                  .map((e) => DescriptionsTile(description: e))
-                                  .toList(),
-                            ),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Languages ",
-                                style: GoogleFonts.openSans(
-                                    fontSize: 20,
-                                    color: Color.fromARGB(255, 18, 79, 124),
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            // Text(
-                            //   "  datadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadata",
-                            //   style: GoogleFonts.openSans(fontSize: 14, letterSpacing: 1),
-                            // ),
-                            LanguagesSection(names: projectdata.languages!),
-                            Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                "Features",
-                                style: GoogleFonts.openSans(
-                                    fontSize: 20,
-                                    color: Color.fromARGB(255, 18, 79, 124),
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            LanguagesSection(names: projectdata.features!),
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    "Project Details",
+                                    style: GoogleFonts.openSans(
+                                        fontSize: 20,
+                                        color: Color.fromARGB(255, 18, 79, 124),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Column(
+                                  children: projectdata!.description!
+                                      .map((e) =>
+                                          DescriptionsTile(description: e))
+                                      .toList(),
+                                ),
+                                LanguagesSection(names: [
+                                  ...projectdata.languages!,
+                                  ...projectdata.features!
+                                ]),
+                              ],
+                            ).paddingAll(8)
                           ],
-                        ).paddingAll(8)
+                        ),
+                        if (context.screenWidth < 600)
+                          Container(
+                            width: context.screenWidth < 600
+                                ? context.screenWidth * 0.9
+                                : 400,
+                            height: 50,
+                            margin: const EdgeInsets.all(8),
+                            child: CommonElevatedButton(
+                                onPressed: () async {
+                                  launchUrl(Uri.parse(
+                                      projectdata.sourceCode.toString()));
+                                },
+                                iconButton: true,
+                                roundedBorder: false,
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Color.fromARGB(255, 18, 79, 124),
+                                    foregroundColor: Colors.white,
+                                    textStyle:
+                                        GoogleFonts.openSans(fontSize: 18)),
+                                icon: const FaIcon(FontAwesomeIcons.github),
+                                text: "View in Github"),
+                          )
                       ],
                     ),
-                    Container(
-                      width: context.screenWidth * 0.9,
-                      child: CommonElevatedButton(
-                          onPressed: () {},
-                          iconButton: true,
-                          roundedBorder: false,
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromARGB(255, 18, 79, 124),
-                              foregroundColor: Colors.white,
-                              textStyle: GoogleFonts.openSans(fontSize: 18)),
-                          icon: const FaIcon(FontAwesomeIcons.github),
-                          text: "View in Github"),
-                    )
-                  ],
+                  ),
                 ),
               );
             }));

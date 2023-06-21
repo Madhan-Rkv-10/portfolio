@@ -11,7 +11,7 @@ class SkillsCard extends StatelessWidget {
     required this.image,
     this.isFlutter = false,
     required this.name,
-    this.width = 170,
+    this.width = 190,
   }) : super(key: key);
 
   final String image;
@@ -46,7 +46,7 @@ class SkillsCard extends StatelessWidget {
         Container(
           height: 250,
           width: width,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(8),

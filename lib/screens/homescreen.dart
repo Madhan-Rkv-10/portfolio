@@ -76,7 +76,8 @@ class ScreenA extends HookConsumerWidget {
                     ),
                     Text(
                         "Passionate Flutter developer with a knack for creating sleek and functional mobile applications.",
-                        style: GoogleFonts.openSans(fontSize: 14)),
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.openSans(fontSize: 15)),
                     const SizedBox(
                       height: 15,
                     ),

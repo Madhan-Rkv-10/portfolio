@@ -1,11 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:madhan_portfolio/screens/project_details.dart';
+
 import '../main.dart';
 import '../responsive/mobile_Screen.dart';
 import '../responsive/web_screen.dart';
-import '../screens/homescreen.dart';
 import '../screens/contacts.dart';
+import '../screens/homescreen.dart';
 import '../screens/projects.dart';
 import '../ui_utils/responsive_layout.dart';
 
@@ -51,8 +53,9 @@ final GoRouter goRouter = GoRouter(
             GoRoute(
               name: AppRoute.webProjectDetails.name,
               path: 'wProjectDetails/:id',
+              parentNavigatorKey: _rootNavigatorKey,
               builder: (BuildContext context, GoRouterState state) {
-                return ProjectDetails(
+                return Sample(
                   id: state.pathParameters['id']!,
                   title: state.queryParameters['title'] ?? '',
                 );
@@ -75,6 +78,7 @@ final GoRouter goRouter = GoRouter(
             GoRoute(
               name: AppRoute.projectDetails.name,
               path: 'projectDetails/:id',
+              parentNavigatorKey: _rootNavigatorKey,
               builder: (BuildContext context, GoRouterState state) {
                 return ProjectDetails(
                   id: state.pathParameters['id']!,
@@ -108,3 +112,23 @@ final GoRouter goRouter = GoRouter(
     ),
   ],
 );
+
+class Sample extends StatefulWidget {
+  final String id;
+  final String title;
+  const Sample({
+    Key? key,
+    required this.id,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  State<Sample> createState() => _SampleState();
+}
+
+class _SampleState extends State<Sample> {
+  @override
+  Widget build(BuildContext context) {
+    return AppBar();
+  }
+}

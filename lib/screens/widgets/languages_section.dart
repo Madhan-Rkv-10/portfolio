@@ -51,27 +51,6 @@ class LanguagesCard extends StatelessWidget {
             style: GoogleFonts.openSans(
                 fontSize: 16, color: Colors.black, fontWeight: FontWeight.w500),
           ),
-        )
-
-        // Row(
-        //   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     // Container(
-        //     //   width: 8,
-        //     //   height: double.infinity,
-        //     //   decoration: BoxDecoration(
-        //     //       boxShadow: [],
-        //     //       color: Colors.white,
-        //     //       borderRadius: BorderRadius.only(
-        //     //           topLeft: Radius.circular(8),
-        //     //           bottomLeft: Radius.circular(8))),
-        //     //   child: Text(""),
-        //     // ),
-        //     // SizedBox(width: 20),
-
-        //   ],
-        // ),
-
-        );
+        ));
   }
 }

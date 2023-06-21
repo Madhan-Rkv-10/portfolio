@@ -136,7 +136,7 @@ class ScreenC extends HookConsumerWidget {
                 title: "Email",
               ),
               CommonTextField(
-                controller: subjectController,
+                controller: emailController,
                 validate: (value) {
                   if (value.isEmpty) {
                     return 'This field is required';
@@ -151,44 +151,68 @@ class ScreenC extends HookConsumerWidget {
                 textinputAction: TextInputAction.next,
                 textinputType: TextInputType.name,
               ),
+              FormTitle(
+                title: "Mobile Number",
+              ),
+              Container(
+                child: CommonTextField(
+                    controller: phoneNumberController,
+                    phoneLength: true,
+                    validate: (value) {
+                      if (value.isEmpty) {
+                        return 'This field is required';
+                      } else {
+                        if (value.length > 10)
+                          return "please Enter Valid Mobile Number";
+                      }
 
+                      // using regular expression
+
+                      // the email is valid
+                      return '';
+                    },
+                    onEditing: (value) {
+                      _formKey.currentState?.validate();
+                      return '';
+                    },
+                    title: 'title',
+                    textinputAction: TextInputAction.next,
+                    textinputType: TextInputType.number),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              FormTitle(
+                title: "Subject",
+              ),
+              Container(
+                child: CommonTextField(
+                  controller: subjectController,
+                  validate: (value) {
+                    if (value.isEmpty) {
+                      return 'This field is required';
+                    } else {}
+
+                    // using regular expression
+
+                    // the email is valid
+                    return '';
+                  },
+                  onEditing: (value) {
+                    _formKey.currentState?.validate();
+                    return '';
+                  },
+                  title: 'title',
+                  textinputAction: TextInputAction.next,
+                  textinputType: TextInputType.name,
+                ),
+              ),
               const SizedBox(
                 height: 8,
               ),
               FormTitle(
                 title: "Message",
               ),
-              // SizedBox(
-              //   width: double.infinity,
-              //   child: TextFormField(
-              //     minLines: 1,
-              //     maxLines: 5,
-              //     validator: (value) {
-              //       if (value == null || value.isEmpty) {
-              //         return '*Required';
-              //       }
-              //       return null;
-              //     },
-              //     controller: messageController,
-              //     scrollPadding: const EdgeInsets.all(5),
-              //     keyboardType: TextInputType.multiline,
-              //     textInputAction: TextInputAction.done,
-              //     enableSuggestions: true,
-              //     style: const TextStyle(fontSize: 15),
-              //     decoration: InputDecoration(
-              //       // hintText: 'Hi',
-              //       contentPadding:
-              //           EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-              //       fillColor: Colors.white,
-              //       border: OutlineInputBorder(
-              //         borderSide: BorderSide(
-              //           color: primaryColor,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-
               CommonTextField(
                 controller: messageController,
                 maxline: true,
@@ -210,16 +234,15 @@ class ScreenC extends HookConsumerWidget {
                 textinputAction: TextInputAction.done,
                 textinputType: TextInputType.multiline,
               ),
-
               Container(
                 // width: context.screenWidth * 0.9,
                 child: CommonElevatedButton(
                   loading: isLoading.value,
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      log("${nameController.text}"
-                          "${emailController.text}"
-                          "${messageController.text}");
+                      // log("${nameController.text}"
+                      //     "${emailController.text}"
+                      //     "${messageController.text}");
                       isLoading.value = !isLoading.value;
                       final values = await sendEmail(nameController.text,
                           emailController.text, messageController.text);
@@ -249,24 +272,6 @@ class ScreenC extends HookConsumerWidget {
       ),
     );
   }
-
-  // InputDecoration commonDecoration(String value) {
-  //   return InputDecoration(
-  //       hintText: value,
-  //       filled: true,
-  //       border: InputBorder.none,
-  //       enabledBorder: OutlineInputBorder(
-  //         borderSide: BorderSide(
-  //           color: Colors.purple,
-  //         ),
-  //       ),
-  //       focusedBorder: OutlineInputBorder(
-  //         borderSide: BorderSide(
-  //           color: Colors.purple,
-  //         ),
-  //       ),
-  //       fillColor: Colors.white);
-  // }
 
   Future sendEmail(String name, String email, String message) async {
     final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
@@ -317,18 +322,20 @@ class CommonTextField extends HookConsumerWidget {
       required this.title,
       required this.textinputAction,
       required this.textinputType,
+      this.phoneLength = false,
       this.maxline = false,
       super.key});
   final TextEditingController controller;
-  final String Function(String) validate;
-  final String Function(String) onEditing;
+  final Function(String) validate;
+  final Function(String) onEditing;
   final String title;
   final TextInputType textinputType;
   final TextInputAction textinputAction;
   final bool maxline;
+  final bool phoneLength;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: TextFormField(
         enableSuggestions: false,
@@ -338,13 +345,17 @@ class CommonTextField extends HookConsumerWidget {
         keyboardType: textinputType,
         maxLines: maxline ? 5 : 1,
         minLines: 1,
-        validator: (validate) => validate,
+        maxLength: phoneLength ? 10 : null,
+        validator: (v) {
+          return validate(v ?? '');
+        },
         autocorrect: false,
 //  enableSuggestions: false,
         style: const TextStyle(
           fontSize: 18,
           color: Colors.black,
         ),
+        onFieldSubmitted: validate,
         onChanged: (validate) => onEditing,
         decoration: const InputDecoration(
             enabledBorder: OutlineInputBorder(

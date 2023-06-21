@@ -372,7 +372,7 @@ class WebScreenLayout extends HookConsumerWidget {
             const SkillsSectionWeb(),
             Container(
                 // height: 700,
-                margin: EdgeInsets.symmetric(vertical: 15),
+                margin: const EdgeInsets.symmetric(vertical: 15),
                 constraints: const BoxConstraints(
                   maxWidth: 1400,
                 ),
@@ -390,11 +390,11 @@ class WebScreenLayout extends HookConsumerWidget {
                 maxWidth: 1400,
               ),
               height: 700,
-              child: ProjectWeb(),
+              child: const ProjectWeb(),
             ),
             const ContactSection(),
           ],
-        ).paddingAll(10),
+        ).paddingAll(16),
       ),
     );
   }

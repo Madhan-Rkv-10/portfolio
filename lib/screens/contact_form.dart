@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../ui_utils/common_elevated_button.dart';
 import 'contacts.dart';
 
 class ContactForm extends HookConsumerWidget {
@@ -20,6 +21,7 @@ class ContactForm extends HookConsumerWidget {
     final emailController = useTextEditingController();
     final subjectController = useTextEditingController();
     final messageController = useTextEditingController();
+    final isLoading = useState(false);
     return Container(
       margin: EdgeInsets.only(
         top: 15,
@@ -42,7 +44,7 @@ class ContactForm extends HookConsumerWidget {
                 // using regular expression
 
                 // the email is valid
-                return '';
+                return null;
               },
               onEditing: (value) {
                 formkey.currentState?.validate();
@@ -51,45 +53,7 @@ class ContactForm extends HookConsumerWidget {
               title: '',
               textinputAction: TextInputAction.next,
               textinputType: TextInputType.name),
-        )
-        // Container(
-        //   width: double.infinity,
-        //   // height: 50,
-        //   // constraints: BoxConstraints(maxHeight: 80, minHeight: 45),
-        //   child: TextFormField(
-        //     enableSuggestions: true,
-        //     keyboardType: TextInputType.name,
-        //     onChanged: (value) {
-        //      formkey.currentState?.validate();
-        //     },
-        //     validator: (value) {
-        //       // Check if this field is empty
-        //       if (value == null || value.isEmpty) {
-        //         return 'This field is required';
-        //       }
-
-        //       // using regular expression
-
-        //       // the email is valid
-        //       return null;
-        //     },
-        //     controller: nameController,
-        //     textInputAction: TextInputAction.next,
-        //     style: GoogleFonts.openSans(fontSize: 18, color: Colors.black),
-        //     decoration: InputDecoration(
-        //       // hintText: 'Hi',
-        //       contentPadding:
-        //           EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-        //       fillColor: Colors.white,
-        //       border: OutlineInputBorder(
-        //         borderSide: BorderSide(
-        //           color: primaryColor,
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        ,
+        ),
         SizedBox(
           height: 8,
         ),
@@ -97,48 +61,13 @@ class ContactForm extends HookConsumerWidget {
           isWeb: true,
           title: "Email",
         ),
-        // Container(
-        //   width: double.infinity,
-        //   // constraints: BoxConstraints(maxHeight: 80, minHeight: 45),
-        //   child: TextFormField(
-        //     enableSuggestions: true,
-        //     controller: emailController,
-        //     onChanged: (value) {
-        //      formkey.currentState?.validate();
-        //     },
-        //     validator: (value) {
-        //       if (value == null || value.isEmpty) {
-        //         return '*Required';
-        //       } else {
-        //         if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-        //           return "Please enter a valid email address";
-        //         }
-        //       }
-        //       return null;
-        //     },
-        //     keyboardType: TextInputType.name,
-        //     textInputAction: TextInputAction.next,
-        //     style: GoogleFonts.openSans(fontSize: 18),
-        //     decoration: InputDecoration(
-        //       contentPadding:
-        //           EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-        //       // hintText: 'Email',
-        //       fillColor: Colors.white,
-        //       border: OutlineInputBorder(
-        //         borderSide: BorderSide(
-        //           color: Colors.purple,
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),Premov
 
         Container(
           child: CommonTextField(
               controller: emailController,
               onEditing: (p0) {
                 formkey.currentState!.validate();
-                return '';
+                return null;
               },
               validate: (value) {
                 if (value.isEmpty) {
@@ -148,7 +77,7 @@ class ContactForm extends HookConsumerWidget {
                     return "Please enter a valid email address";
                   }
                 }
-                return '';
+                return null;
               },
               title: '',
               textinputAction: TextInputAction.next,
@@ -159,54 +88,22 @@ class ContactForm extends HookConsumerWidget {
           isWeb: true,
           title: "Mobile Number",
         ),
-        // Container(
-        //   width: double.infinity,
-        //   // constraints: BoxConstraints(maxHeight: 80, minHeight: 45),
-        //   child: TextFormField(
-        //     enableSuggestions: true,
-        //     // maxLength: 10,
-        //     // spellCheckConfiguration: SpellCheckConfiguration.disabled(),
-        //     controller: phoneNumberController,
-        //     keyboardType: TextInputType.number,
-        //     textInputAction: TextInputAction.next,
-        //     style: GoogleFonts.openSans(fontSize: 18),
-        //     validator: (value) {
-        //       // Check if this field is empty
-        // if (value == null || value.isEmpty) {
-        //   return 'This field is required';
-        // } else {}
-
-        // // using regular expression
-
-        // // the email is valid
-        // return null;
-        //     },
-        //     decoration: InputDecoration(
-        //       // hintText: 'Hi',
-        //       contentPadding:
-        //           EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-        //       fillColor: Colors.white,
-        //       border: OutlineInputBorder(
-        //         borderSide: BorderSide(
-        //           color: Colors.purple,
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
 
         Container(
           child: CommonTextField(
               controller: phoneNumberController,
+              phoneLength: true,
               validate: (value) {
                 if (value.isEmpty) {
                   return 'This field is required';
-                } else {}
+                } else if (value.length < 10) {
+                  return "please Enter Valid Mobile Number";
+                }
 
                 // using regular expression
 
                 // the email is valid
-                return '';
+                return null;
               },
               onEditing: (value) {
                 formkey.currentState?.validate();
@@ -263,11 +160,11 @@ class ContactForm extends HookConsumerWidget {
               // using regular expression
 
               // the email is valid
-              return '';
+              return null;
             },
             onEditing: (value) {
               formkey.currentState?.validate();
-              return '';
+              return null;
             },
             title: 'title',
             textinputAction: TextInputAction.next,
@@ -325,7 +222,7 @@ class ContactForm extends HookConsumerWidget {
               // using regular expression
 
               // the email is valid
-              return '';
+              return null;
             },
             onEditing: (value) {
               formkey.currentState?.validate();
@@ -338,31 +235,63 @@ class ContactForm extends HookConsumerWidget {
         ),
 
         Container(
-            width: 710,
-            height: 50,
-            margin: EdgeInsets.only(top: 30, bottom: 20),
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    foregroundColor: Colors.white),
-                onPressed: () async {
-                  if (formkey.currentState!.validate()) {
-                    log("${nameController.text}"
-                        "${emailController.text}"
-                        "${messageController.text}");
-                    final values = await sendEmail(nameController.text,
-                        emailController.text, messageController.text);
-                    // //TODO: send email
-                    nameController.clear();
-                    emailController.clear();
-                    phoneNumberController.clear();
-                    messageController.clear();
-                    subjectController.clear();
-                    print(values);
-                  }
-                  // await FlutterEmailSender.send(emailData);
-                },
-                child: Text('Send Message'))),
+          width: 710,
+          height: 50,
+          margin: EdgeInsets.only(top: 30, bottom: 20),
+          child: CommonElevatedButton(
+            loading: isLoading.value,
+            onPressed: () async {
+              if (formkey.currentState!.validate()) {
+                // log("${nameController.text}"
+                //     "${emailController.text}"
+                //     "${messageController.text}");
+                isLoading.value = !isLoading.value;
+                final values = await sendEmail(nameController.text,
+                    emailController.text, messageController.text);
+                // //TODO: send email
+                nameController.clear();
+                emailController.clear();
+                phoneNumberController.clear();
+                messageController.clear();
+                subjectController.clear();
+                print(values);
+                isLoading.value = !isLoading.value;
+              }
+              // await FlutterEmailSender.send(emailData);
+            },
+            iconButton: false,
+            text: "Submit",
+            roundedBorder: false,
+            borderRadiuss: 0,
+            style: ElevatedButton.styleFrom(
+                backgroundColor: primaryColor, foregroundColor: Colors.white),
+          ),
+        )
+
+        //  ElevatedButton(
+        //     style: ElevatedButton.styleFrom(
+        //         backgroundColor: primaryColor,
+        //         foregroundColor: Colors.white),
+        //     onPressed: () async {
+        //       if (formkey.currentState!.validate()) {
+        //         log("${nameController.text}"
+        //             "${emailController.text}"
+        //             "${messageController.text}");
+        //         final values = await sendEmail(nameController.text,
+        //             emailController.text, messageController.text);
+        //         // //TODO: send email
+        //         nameController.clear();
+        //         emailController.clear();
+        //         phoneNumberController.clear();
+        //         messageController.clear();
+        //         subjectController.clear();
+        //         print(values);
+        //       } else {
+        //         print("Error In Object");
+        //       }
+        //       // await FlutterEmailSender.send(emailData);
+        //     },
+        //     child: Text('Send Message'))),
       ]),
     );
   }

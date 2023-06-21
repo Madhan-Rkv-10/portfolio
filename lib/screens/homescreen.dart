@@ -76,7 +76,8 @@ class ScreenA extends HookConsumerWidget {
                     ),
                     Text(
                         "Passionate Flutter developer with a knack for creating sleek and functional mobile applications.",
-                        style: GoogleFonts.openSans(fontSize: 14)),
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.openSans(fontSize: 15)),
                     const SizedBox(
                       height: 15,
                     ),
@@ -104,7 +105,7 @@ class ScreenA extends HookConsumerWidget {
                         ElevatedButton(
                           onPressed: () {
                             launchUrl(Uri.parse(
-                                "https://drive.google.com/file/d/1Fb-qefjDj4tPPfjtf3w9x5kY8itqzNCR/view"));
+                                "https://drive.google.com/file/d/1z6dOXS3w9MdJxOO5jstnGoYsQ_qwdpba/view?usp=sharing"));
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: primaryColor,

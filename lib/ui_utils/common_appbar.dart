@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:madhan_portfolio/screens/contacts.dart';
 import 'package:madhan_portfolio/ui_utils/common_icon.dart';
 import 'package:madhan_portfolio/utils/src/helpers/ui_dimens.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CommonAppBar extends AppBar {
   final ScrollController? scrollController;
@@ -26,26 +27,36 @@ class CommonAppBar extends AppBar {
               title ?? '',
               style: GoogleFonts.openSans(color: Colors.white),
             ),
-            // shape: RoundedRectangleBorder(
-            //     borderRadius: BorderRadius.only(
-            //   bottomLeft: Radius.circular(16),
-            //   bottomRight: Radius.circular(16),
-            // )),
             elevation: 10,
             actions: [
               if (!actionExpand) ...[
                 CommonIcon(
-                  icon: FontAwesomeIcons.instagram,
-                  onPressed: () {},
+                  icon: Icons.email_outlined,
+                  onPressed: () async {
+                    final Uri emailLaunchUri = Uri(
+                      scheme: 'mailto',
+                      path: 'madhanrkv10@gmail.com',
+                    );
+                    await launchUrl(emailLaunchUri);
+                  },
                   color: Colors.white,
                 ),
                 CommonIcon(
                     icon: FontAwesomeIcons.github,
-                    onPressed: () {},
+                    onPressed: () async {
+                      const String url =
+                          "https://github.com/agiratech-madhan?tab=repositories";
+
+                      await launchUrl(Uri.parse(url));
+                    },
                     color: Colors.white),
                 CommonIcon(
                     icon: FontAwesomeIcons.linkedinIn,
-                    onPressed: () {},
+                    onPressed: () async {
+                      await launchUrl(
+                        Uri.parse("https://www.linkedin.com/in/madhan-k-/"),
+                      );
+                    },
                     color: Colors.white),
               ] else ...[
                 CommonIcon(

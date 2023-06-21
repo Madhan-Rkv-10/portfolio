@@ -44,7 +44,7 @@ class SkillsCard extends StatelessWidget {
               )),
         ),
         Container(
-          height: 250,
+          height: 300,
           width: width,
           decoration: const BoxDecoration(
               color: Colors.white,

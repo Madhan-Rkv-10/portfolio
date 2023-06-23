@@ -310,8 +310,7 @@ class FindMe extends StatelessWidget {
         ContactIcon(
             icon: FontAwesomeIcons.github,
             onPressed: () async {
-              const String url =
-                  "https://github.com/agiratech-madhan?tab=repositories";
+              const String url = "https://github.com/Madhan-Rkv-10";
 
               await launchUrl(Uri.parse(url));
             }),

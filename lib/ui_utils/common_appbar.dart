@@ -71,8 +71,7 @@ class CommonAppBar extends AppBar {
                       if (isWeb) {
                         scrollToTopPercentage(scrollController!, 0.3);
                       } else {
-                        const String url =
-                            "https://github.com/agiratech-madhan?tab=repositories";
+                        const String url = "https://github.com/Madhan-Rkv-10";
 
                         await launchUrl(Uri.parse(url));
                       }

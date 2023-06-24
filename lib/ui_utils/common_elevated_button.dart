@@ -53,7 +53,7 @@ class CommonElevatedButton extends StatelessWidget {
         onPressed: onPressed,
         child: loading
             ? const CircularProgressIndicator.adaptive(
-                // color: Colors.white,
+                backgroundColor: Colors.white,
                 valueColor: AlwaysStoppedAnimation(Colors.white))
             : Text(
                 text,

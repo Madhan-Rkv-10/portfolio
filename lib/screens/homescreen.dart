@@ -76,7 +76,8 @@ class ScreenA extends HookConsumerWidget {
                     ),
                     Text(
                         "Passionate Flutter developer with a knack for creating sleek and functional mobile applications.",
-                        style: GoogleFonts.openSans(fontSize: 14)),
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.openSans(fontSize: 15)),
                     const SizedBox(
                       height: 15,
                     ),
@@ -125,18 +126,10 @@ class ScreenA extends HookConsumerWidget {
                       textAlign: TextAlign.justify,
                       style: GoogleFonts.openSans(
                           fontSize: 18, color: Colors.black),
-                    )
-                        .animate()
-                        .fadeIn(duration: 900.ms, delay: 300.ms)
-                        .shimmer(
-                            blendMode: BlendMode.srcOver, color: Colors.white12)
-                        .move(
-                            begin: const Offset(-16, 0),
-                            curve: Curves.easeOutQuad),
+                    ),
                     SizedBox(
                       height: 8,
                     ),
-
                     Align(
                       alignment: Alignment.topLeft,
                       child: Text(

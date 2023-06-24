@@ -24,7 +24,7 @@ class ScreenB extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = useScrollController();
-    final onTapped = useState(false);
+    // final onTapped = useState(false);
 
     return Scaffold(
         // backgroundColor: Colors.black12,

@@ -48,7 +48,7 @@ class WebScreenLayout extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 700,
+              height: 600,
               // color: Colors.blue,
               constraints: const BoxConstraints(
                 maxWidth: 1400,
@@ -143,7 +143,7 @@ class WebScreenLayout extends HookConsumerWidget {
                       ],
                     ),
                   ),
-                  Expanded(
+                  Flexible(
                     child: Container(
                       child: Transform.scale(
                         scale: 1.2,
@@ -172,7 +172,7 @@ class WebScreenLayout extends HookConsumerWidget {
                           child: Container(
                             constraints: const BoxConstraints(
                               maxWidth: 500,
-                              maxHeight: 500,
+                              // maxHeight: 400,
                             ),
                             child: Transform.scale(
                               scale: 1.2,

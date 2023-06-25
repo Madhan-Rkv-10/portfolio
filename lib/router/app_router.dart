@@ -43,6 +43,7 @@ final GoRouter goRouter = GoRouter(
       },
       routes: <RouteBase>[
         /// The first screen to display in the bottom navigation bar.
+
         GoRoute(
           path: '/home',
           name: AppRoute.home.name,

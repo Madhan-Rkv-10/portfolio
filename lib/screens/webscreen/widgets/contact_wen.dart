@@ -17,7 +17,7 @@ class ContactSection extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      constraints: BoxConstraints(
+      constraints: const BoxConstraints(
         maxWidth: 1400,
       ),
       margin: const EdgeInsets.only(top: 30),
@@ -27,7 +27,7 @@ class ContactSection extends HookConsumerWidget {
           BoxShadow(
             blurRadius: 8,
             color: primaryColor,
-            offset: Offset(0, 2),
+            offset: const Offset(0, 2),
           )
         ],
         borderRadius: BorderRadius.circular(10),
@@ -55,7 +55,7 @@ class ContactSection extends HookConsumerWidget {
                     ),
                   ],
                 ),
-                Container(
+                SizedBox(
                     width: 500,
                     // height: 600,
                     child: Lottie.asset('assets/json/contact.json')),
@@ -69,12 +69,12 @@ class ContactSection extends HookConsumerWidget {
                   style:
                       GoogleFonts.openSans(fontSize: 20, color: Colors.black),
                 ),
-                FindMe(isbottom: true)
+                const FindMe(isbottom: true)
               ],
             ),
           ),
           Expanded(
-            child: Form(key: _formKey, child: ContactForm(formkey: _formKey)),
+            child: Form(key: _formKey, child: const ContactForm()),
           )
         ],
       ),

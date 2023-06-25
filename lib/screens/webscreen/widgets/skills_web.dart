@@ -18,15 +18,10 @@ class SkillsSectionWeb extends HookConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // SizedBox(
-          //   height: 40,
-          // ),
-
           Container(
             constraints: const BoxConstraints(
               maxWidth: 1400,
             ),
-            // color: Colors.red,
             child: Column(
               children: [
                 const SizedBox(
@@ -47,20 +42,21 @@ class SkillsSectionWeb extends HookConsumerWidget {
                   height: 30,
                 ),
                 AsyncValueWidget(
-                    value: ref.watch(resumeDataProvider),
-                    data: (data) {
-                      return Wrap(
-                        spacing: 23,
-                        runSpacing: 15,
-                        children: data.data!.languages!
-                            .map((e) => SkillsCard(
-                                  image: e.imageUrl ?? '',
-                                  name: e.name ?? '',
-                                  width: 240,
-                                ))
-                            .toList(),
-                      );
-                    }),
+                  value: ref.watch(resumeDataProvider),
+                  data: (data) {
+                    return Wrap(
+                      spacing: 23,
+                      runSpacing: 15,
+                      children: data.data!.languages!
+                          .map((e) => SkillsCard(
+                                image: e.imageUrl ?? '',
+                                name: e.name ?? '',
+                                width: 240,
+                              ))
+                          .toList(),
+                    );
+                  },
+                ),
               ],
             ),
           ),

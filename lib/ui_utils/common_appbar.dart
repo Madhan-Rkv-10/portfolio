@@ -35,9 +35,9 @@ class CommonAppBar extends AppBar {
             backgroundColor: primaryColor,
             automaticallyImplyLeading: false,
             leading: CircleAvatar(
-              child: Text("M"),
               backgroundColor: Colors.white,
               radius: 7,
+              child: Image.asset("assets/images/madhan.png"),
             ).paddingOnly(left: 5),
             title: Text(
               title ?? 'Madhan',

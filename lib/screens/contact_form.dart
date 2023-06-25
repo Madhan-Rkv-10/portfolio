@@ -9,11 +9,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../ui_utils/common_elevated_button.dart';
+import '../ui_utils/common_textfield.dart';
 import 'contacts.dart';
 
+const webScreenSize = 700;
+final formKey = GlobalKey<FormState>();
+
 class ContactForm extends HookConsumerWidget {
-  final GlobalKey<FormState> formkey;
-  const ContactForm({required this.formkey, super.key});
+  const ContactForm({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nameController = useTextEditingController();
@@ -22,278 +25,190 @@ class ContactForm extends HookConsumerWidget {
     final subjectController = useTextEditingController();
     final messageController = useTextEditingController();
     final isLoading = useState(false);
-    return Container(
-      margin: EdgeInsets.only(
-        top: 15,
-        right: 20,
-      ),
-      child: Column(mainAxisSize: MainAxisSize.min, children: [
-        FormTitle(
-          isWeb: true,
-          title: "Name",
-        ),
-        Container(
-          child: CommonTextField(
-              controller: nameController,
-              validate: (value) {
-                // Check if this field is empty
-                if (value.isEmpty) {
-                  return 'This field is required';
-                }
-
-                // using regular expression
-
-                // the email is valid
-                return null;
-              },
-              onEditing: (value) {
-                formkey.currentState?.validate();
-                return '';
-              },
-              title: '',
-              textinputAction: TextInputAction.next,
-              textinputType: TextInputType.name),
-        ),
-        SizedBox(
-          height: 8,
-        ),
-        FormTitle(
-          isWeb: true,
-          title: "Email",
-        ),
-
-        Container(
-          child: CommonTextField(
-              controller: emailController,
-              onEditing: (p0) {
-                formkey.currentState!.validate();
-                return null;
-              },
-              validate: (value) {
-                if (value.isEmpty) {
-                  return '*Required';
-                } else {
-                  if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                    return "Please enter a valid email address";
+    return LayoutBuilder(builder: (context, constraints) {
+      final isWeb = constraints.maxWidth > webScreenSize;
+      return Form(
+        key: formKey,
+        child: Container(
+          margin: const EdgeInsets.only(
+            top: 15,
+            right: 20,
+          ),
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            FormTitle(
+              isWeb: isWeb,
+              title: "Name",
+            ),
+            CommonTextField(
+                controller: nameController,
+                validate: (value) {
+                  // Check if this field is empty
+                  if (value.isEmpty) {
+                    return 'This field is required';
                   }
-                }
-                return null;
-              },
-              title: '',
-              textinputAction: TextInputAction.next,
-              textinputType: TextInputType.emailAddress),
+
+                  // using regular expression
+
+                  // the email is valid
+                  return null;
+                },
+                onEditing: (value) {
+                  formKey.currentState?.validate();
+                  return '';
+                },
+                title: '',
+                textinputAction: TextInputAction.next,
+                textinputType: TextInputType.name),
+            const SizedBox(
+              height: 8,
+            ),
+            FormTitle(
+              isWeb: isWeb,
+              title: "Email",
+            ),
+            Container(
+              child: CommonTextField(
+                  controller: emailController,
+                  onEditing: (p0) {
+                    formKey.currentState!.validate();
+                    return null;
+                  },
+                  validate: (value) {
+                    if (value.isEmpty) {
+                      return '*Required';
+                    } else {
+                      if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                        return "Please enter a valid email address";
+                      }
+                    }
+                    return null;
+                  },
+                  title: '',
+                  textinputAction: TextInputAction.next,
+                  textinputType: TextInputType.emailAddress),
+            ),
+            const SizedBox(height: 8),
+            FormTitle(
+              isWeb: isWeb,
+              title: "Mobile Number",
+            ),
+            Container(
+              child: CommonTextField(
+                  controller: phoneNumberController,
+                  phoneLength: isWeb,
+                  validate: (value) {
+                    if (value.isEmpty) {
+                      return 'This field is required';
+                    } else if (value.length < 10) {
+                      return "please Enter Valid Mobile Number";
+                    }
+
+                    // using regular expression
+
+                    // the email is valid
+                    return null;
+                  },
+                  onEditing: (value) {
+                    formKey.currentState?.validate();
+                    return '';
+                  },
+                  title: 'title',
+                  textinputAction: TextInputAction.next,
+                  textinputType: TextInputType.number),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            FormTitle(
+              isWeb: isWeb,
+              title: "Subject",
+            ),
+            Container(
+              child: CommonTextField(
+                controller: subjectController,
+                validate: (value) {
+                  if (value.isEmpty) {
+                    return 'This field is required';
+                  } else {}
+
+                  return null;
+                },
+                onEditing: (value) {
+                  formKey.currentState?.validate();
+                  return null;
+                },
+                title: 'title',
+                textinputAction: TextInputAction.next,
+                textinputType: TextInputType.name,
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const FormTitle(
+              isWeb: true,
+              title: "Message",
+            ),
+            Container(
+              child: CommonTextField(
+                controller: messageController,
+                maxline: true,
+                validate: (value) {
+                  if (value.isEmpty) {
+                    return 'This field is required';
+                  } else {}
+
+                  // using regular expression
+
+                  // the email is valid
+                  return null;
+                },
+                onEditing: (value) {
+                  formKey.currentState?.validate();
+                  return '';
+                },
+                title: 'title',
+                textinputAction: TextInputAction.done,
+                textinputType: TextInputType.multiline,
+              ),
+            ),
+            Container(
+              width: isWeb ? 710 : double.infinity,
+              height: 50,
+              margin: const EdgeInsets.only(top: 30, bottom: 20),
+              child: CommonElevatedButton(
+                loading: isLoading.value,
+                onPressed: () async {
+                  if (formKey.currentState!.validate()) {
+                    // log("${nameController.text}"
+                    //     "${emailController.text}"
+                    //     "${messageController.text}");
+                    isLoading.value = !isLoading.value;
+                    final values = await sendEmail(nameController.text,
+                        emailController.text, messageController.text);
+
+                    nameController.clear();
+                    emailController.clear();
+                    phoneNumberController.clear();
+                    messageController.clear();
+                    subjectController.clear();
+                    isLoading.value = !isLoading.value;
+                  }
+                  // await FlutterEmailSender.send(emailData);
+                },
+                iconButton: false,
+                text: "Submit",
+                roundedBorder: false,
+                borderRadiuss: 0,
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: primaryColor,
+                    foregroundColor: Colors.white),
+              ),
+            )
+          ]),
         ),
-        SizedBox(height: 8),
-        FormTitle(
-          isWeb: true,
-          title: "Mobile Number",
-        ),
-
-        Container(
-          child: CommonTextField(
-              controller: phoneNumberController,
-              phoneLength: true,
-              validate: (value) {
-                if (value.isEmpty) {
-                  return 'This field is required';
-                } else if (value.length < 10) {
-                  return "please Enter Valid Mobile Number";
-                }
-
-                // using regular expression
-
-                // the email is valid
-                return null;
-              },
-              onEditing: (value) {
-                formkey.currentState?.validate();
-                return '';
-              },
-              title: 'title',
-              textinputAction: TextInputAction.next,
-              textinputType: TextInputType.number),
-        ),
-
-        SizedBox(
-          height: 8,
-        ),
-        FormTitle(
-          isWeb: true,
-          title: "Subject",
-        ),
-        // Container(
-        //   width: double.infinity,
-        //   // constraints: BoxConstraints(maxHeight: 80, minHeight: 45),
-        //   child: TextFormField(
-        //     enableSuggestions: true,
-        //     textInputAction: TextInputAction.next,
-        //     controller: subjectController,
-        //     validator: (value) {
-        //       if (value == null || value.isEmpty) {
-        //         return '*Required';
-        //       }
-        //       return null;
-        //     },
-        //     style: const TextStyle(fontSize: 18),
-        //     decoration: const InputDecoration(
-        //       // hintText: 'Hi',
-        //       contentPadding:
-        //           EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-        //       fillColor: Colors.white,
-        //       border: OutlineInputBorder(
-        //         borderSide: BorderSide(
-        //           color: Color.fromARGB(255, 18, 79, 124),
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-
-        Container(
-          child: CommonTextField(
-            controller: subjectController,
-            validate: (value) {
-              if (value.isEmpty) {
-                return 'This field is required';
-              } else {}
-
-              // using regular expression
-
-              // the email is valid
-              return null;
-            },
-            onEditing: (value) {
-              formkey.currentState?.validate();
-              return null;
-            },
-            title: 'title',
-            textinputAction: TextInputAction.next,
-            textinputType: TextInputType.name,
-          ),
-        ),
-
-        const SizedBox(
-          height: 8,
-        ),
-        FormTitle(
-          isWeb: true,
-          title: "Message",
-        ),
-        // SizedBox(
-        //   width: double.infinity,
-        //   child: TextFormField(
-        //     minLines: 1,
-        //     maxLines: 5,
-        //     validator: (value) {
-        //       if (value == null || value.isEmpty) {
-        //         return '*Required';
-        //       }
-        //       return null;
-        //     },
-        //     controller: messageController,
-        //     scrollPadding: const EdgeInsets.all(5),
-        //     keyboardType: TextInputType.multiline,
-        //     textInputAction: TextInputAction.done,
-        //     enableSuggestions: true,
-        //     style: const TextStyle(fontSize: 15),
-        //     decoration: InputDecoration(
-        //       // hintText: 'Hi',
-        //       contentPadding:
-        //           EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-        //       fillColor: Colors.white,
-        //       border: OutlineInputBorder(
-        //         borderSide: BorderSide(
-        //           color: primaryColor,
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-
-        Container(
-          child: CommonTextField(
-            controller: messageController,
-            maxline: true,
-            validate: (value) {
-              if (value.isEmpty) {
-                return 'This field is required';
-              } else {}
-
-              // using regular expression
-
-              // the email is valid
-              return null;
-            },
-            onEditing: (value) {
-              formkey.currentState?.validate();
-              return '';
-            },
-            title: 'title',
-            textinputAction: TextInputAction.done,
-            textinputType: TextInputType.multiline,
-          ),
-        ),
-
-        Container(
-          width: 710,
-          height: 50,
-          margin: EdgeInsets.only(top: 30, bottom: 20),
-          child: CommonElevatedButton(
-            loading: isLoading.value,
-            onPressed: () async {
-              if (formkey.currentState!.validate()) {
-                // log("${nameController.text}"
-                //     "${emailController.text}"
-                //     "${messageController.text}");
-                isLoading.value = !isLoading.value;
-                final values = await sendEmail(nameController.text,
-                    emailController.text, messageController.text);
-                // //TODO: send email
-                nameController.clear();
-                emailController.clear();
-                phoneNumberController.clear();
-                messageController.clear();
-                subjectController.clear();
-                print(values);
-                isLoading.value = !isLoading.value;
-              }
-              // await FlutterEmailSender.send(emailData);
-            },
-            iconButton: false,
-            text: "Submit",
-            roundedBorder: false,
-            borderRadiuss: 0,
-            style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor, foregroundColor: Colors.white),
-          ),
-        )
-
-        //  ElevatedButton(
-        //     style: ElevatedButton.styleFrom(
-        //         backgroundColor: primaryColor,
-        //         foregroundColor: Colors.white),
-        //     onPressed: () async {
-        //       if (formkey.currentState!.validate()) {
-        //         log("${nameController.text}"
-        //             "${emailController.text}"
-        //             "${messageController.text}");
-        //         final values = await sendEmail(nameController.text,
-        //             emailController.text, messageController.text);
-        //         // //TODO: send email
-        //         nameController.clear();
-        //         emailController.clear();
-        //         phoneNumberController.clear();
-        //         messageController.clear();
-        //         subjectController.clear();
-        //         print(values);
-        //       } else {
-        //         print("Error In Object");
-        //       }
-        //       // await FlutterEmailSender.send(emailData);
-        //     },
-        //     child: Text('Send Message'))),
-      ]),
-    );
+      );
+    });
   }
 }
 

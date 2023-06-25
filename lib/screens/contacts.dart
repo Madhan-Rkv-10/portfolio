@@ -12,6 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
+import 'package:madhan_portfolio/screens/contact_form.dart';
 import 'package:madhan_portfolio/ui_utils/common_elevated_button.dart';
 import 'package:madhan_portfolio/utils/src/helpers/ui_dimens.dart';
 // import 'package:portfolio_flutter/src/utils/src/helpers/ui_dimens.dart';
@@ -28,12 +29,6 @@ class ScreenC extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final nameController = useTextEditingController();
-    final phoneNumberController = useTextEditingController();
-    final emailController = useTextEditingController();
-    final subjectController = useTextEditingController();
-    final messageController = useTextEditingController();
-    final isLoading = useState(false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: primaryColor,
@@ -45,15 +40,16 @@ class ScreenC extends HookConsumerWidget {
           CommonIcon(
             icon: FontAwesomeIcons.google,
             onPressed: () {
-              final value =
+              const value =
                   "https://developers.google.com/profile/u/mad_han_10";
+              launchUrl(Uri.parse(value));
             },
             color: Colors.white,
           ),
           CommonIcon(
             icon: FontAwesomeIcons.github,
             onPressed: () async {
-              final String url = "https://github.com/Madhan-Rkv-10";
+              const String url = "https://github.com/Madhan-Rkv-10";
 
               await launchUrl(Uri.parse(url));
             },
@@ -110,188 +106,12 @@ class ScreenC extends HookConsumerWidget {
                     // fit: BoxFit.fitHeight,
                     'assets/json/contact.json'),
               ),
-              const FormTitle(
-                title: "Name",
-              ),
-              CommonTextField(
-                  controller: nameController,
-                  validate: (value) {
-                    if (value.isEmpty) {
-                      return 'This field is required';
-                    }
-                    return '';
-                  },
-                  onEditing: (value) {
-                    _formKey.currentState?.validate();
-                    return '';
-                  },
-                  title: '',
-                  textinputAction: TextInputAction.next,
-                  textinputType: TextInputType.name),
-              const SizedBox(
-                height: 8,
-              ),
-              const FormTitle(
-                title: "Email",
-              ),
-              CommonTextField(
-                controller: emailController,
-                validate: (value) {
-                  if (value.isEmpty) {
-                    return 'This field is required';
-                  } else {}
-                  return '';
-                },
-                onEditing: (value) {
-                  _formKey.currentState?.validate();
-                  return '';
-                },
-                title: 'title',
-                textinputAction: TextInputAction.next,
-                textinputType: TextInputType.name,
-              ),
-              FormTitle(
-                title: "Mobile Number",
-              ),
-              Container(
-                child: CommonTextField(
-                    controller: phoneNumberController,
-                    phoneLength: true,
-                    validate: (value) {
-                      if (value.isEmpty) {
-                        return 'This field is required';
-                      } else {
-                        if (value.length > 10)
-                          return "please Enter Valid Mobile Number";
-                      }
-
-                      // using regular expression
-
-                      // the email is valid
-                      return '';
-                    },
-                    onEditing: (value) {
-                      _formKey.currentState?.validate();
-                      return '';
-                    },
-                    title: 'title',
-                    textinputAction: TextInputAction.next,
-                    textinputType: TextInputType.number),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              FormTitle(
-                title: "Subject",
-              ),
-              Container(
-                child: CommonTextField(
-                  controller: subjectController,
-                  validate: (value) {
-                    if (value.isEmpty) {
-                      return 'This field is required';
-                    } else {}
-
-                    // using regular expression
-
-                    // the email is valid
-                    return '';
-                  },
-                  onEditing: (value) {
-                    _formKey.currentState?.validate();
-                    return '';
-                  },
-                  title: 'title',
-                  textinputAction: TextInputAction.next,
-                  textinputType: TextInputType.name,
-                ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              FormTitle(
-                title: "Message",
-              ),
-              CommonTextField(
-                controller: messageController,
-                maxline: true,
-                validate: (value) {
-                  if (value.isEmpty) {
-                    return 'This field is required';
-                  } else {}
-
-                  // using regular expression
-
-                  // the email is valid
-                  return '';
-                },
-                onEditing: (value) {
-                  _formKey.currentState?.validate();
-                  return '';
-                },
-                title: 'title',
-                textinputAction: TextInputAction.done,
-                textinputType: TextInputType.multiline,
-              ),
-              Container(
-                // width: context.screenWidth * 0.9,
-                child: CommonElevatedButton(
-                  loading: isLoading.value,
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      // log("${nameController.text}"
-                      //     "${emailController.text}"
-                      //     "${messageController.text}");
-                      isLoading.value = !isLoading.value;
-                      final values = await sendEmail(nameController.text,
-                          emailController.text, messageController.text);
-                      // //TODO: send email
-                      nameController.clear();
-                      emailController.clear();
-                      phoneNumberController.clear();
-                      messageController.clear();
-                      subjectController.clear();
-                      print(values);
-                      isLoading.value = !isLoading.value;
-                    }
-                    // await FlutterEmailSender.send(emailData);
-                  },
-                  iconButton: false,
-                  text: "Submit",
-                  roundedBorder: false,
-                  borderRadiuss: 0,
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
-                      foregroundColor: Colors.white),
-                ),
-              )
+              const ContactForm()
             ],
           ).paddingSymmetric(horizontal: 14),
         ),
       ),
     );
-  }
-
-  Future sendEmail(String name, String email, String message) async {
-    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
-    const serviceId = 'service_a9lo892';
-    const templateId = 'template_amce8yp';
-    const userId = '_DbPHqYlc1GewkHd9';
-    final response = await http.post(url,
-        headers: {
-          'Content-Type': 'application/json'
-        }, //This line makes sure it works for all platforms.
-        body: json.encode({
-          'service_id': serviceId,
-          'template_id': templateId,
-          'user_id': userId,
-          'template_params': {
-            'from_name': name,
-            'from_email': email,
-            'message': message
-          }
-        }));
-    return response.statusCode;
   }
 }
 
@@ -310,73 +130,5 @@ class FormTitle extends StatelessWidget {
               color: isWeb ? Colors.black : primaryColor,
               fontWeight: FontWeight.w500),
         ));
-  }
-}
-
-class CommonTextField extends HookConsumerWidget {
-  const CommonTextField(
-      {required this.controller,
-      required this.validate,
-      required this.onEditing,
-      required this.title,
-      required this.textinputAction,
-      required this.textinputType,
-      this.phoneLength = false,
-      this.maxline = false,
-      super.key});
-  final TextEditingController controller;
-  final Function(String) validate;
-  final Function(String) onEditing;
-  final String title;
-  final TextInputType textinputType;
-  final TextInputAction textinputAction;
-  final bool maxline;
-  final bool phoneLength;
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return SizedBox(
-      width: double.infinity,
-      child: TextFormField(
-        enableSuggestions: false,
-        cursorColor: primaryColor,
-        textInputAction: TextInputAction.next,
-        controller: controller,
-        keyboardType: textinputType,
-        maxLines: maxline ? 5 : 1,
-        minLines: 1,
-        maxLength: phoneLength ? 10 : null,
-        validator: (v) {
-          return validate(v ?? '');
-        },
-        autocorrect: false,
-//  enableSuggestions: false,
-        style: const TextStyle(
-          fontSize: 18,
-          color: Colors.black,
-        ),
-        onFieldSubmitted: validate,
-        onChanged: (validate) => onEditing,
-        decoration: const InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(255, 18, 79, 124),
-              ),
-            ),
-            // hintText: 'Hi',
-            contentPadding:
-                EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-            fillColor: Colors.white,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(255, 18, 79, 124),
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(255, 18, 79, 124),
-              ),
-            )),
-      ),
-    );
   }
 }

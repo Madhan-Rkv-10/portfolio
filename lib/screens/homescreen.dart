@@ -20,7 +20,6 @@ import '../ui_utils/common_appbar.dart';
 class ScreenA extends HookConsumerWidget {
   /// Constructs a [ScreenA] widget.
   const ScreenA({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(

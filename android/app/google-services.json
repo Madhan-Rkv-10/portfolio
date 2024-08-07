@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "376759971431",
+    "project_id": "madhan-portfolio",
+    "storage_bucket": "madhan-portfolio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376759971431:android:1cdd7e835374107211aec2",
+        "android_client_info": {
+          "package_name": "com.example.madhan_portfolio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376759971431-va92n69n0ojdb7p5h5gh2kcbcasakgqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBfhBEnNz1hBwldQHsxQu_fr50uf_TrzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "376759971431-va92n69n0ojdb7p5h5gh2kcbcasakgqc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
